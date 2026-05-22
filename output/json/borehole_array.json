@@ -1,0 +1,818 @@
+[
+  {
+    "id": "BH-01-01",
+    "x": 570616.501916657,
+    "y": 834901.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 9.42,
+    "karst_risk": "low",
+    "lat": 54.26209456012961,
+    "lon": -8.451004544544649
+  },
+  {
+    "id": "BH-01-02",
+    "x": 570626.501916657,
+    "y": 834901.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 8.93,
+    "karst_risk": "low",
+    "lat": 54.26209513413831,
+    "lon": -8.45085106074502
+  },
+  {
+    "id": "BH-01-03",
+    "x": 570636.501916657,
+    "y": 834901.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 9.54,
+    "karst_risk": "low",
+    "lat": 54.262095707951644,
+    "lon": -8.450697576940016
+  },
+  {
+    "id": "BH-01-04",
+    "x": 570646.501916657,
+    "y": 834901.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 9.3,
+    "karst_risk": "low",
+    "lat": 54.2620962815696,
+    "lon": -8.450544093129652
+  },
+  {
+    "id": "BH-01-05",
+    "x": 570656.501916657,
+    "y": 834901.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 8.43,
+    "karst_risk": "low",
+    "lat": 54.26209685499219,
+    "lon": -8.450390609313912
+  },
+  {
+    "id": "BH-01-06",
+    "x": 570666.501916657,
+    "y": 834901.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 9.71,
+    "karst_risk": "low",
+    "lat": 54.26209742821943,
+    "lon": -8.450237125492816
+  },
+  {
+    "id": "BH-01-07",
+    "x": 570676.501916657,
+    "y": 834901.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 9.4,
+    "karst_risk": "low",
+    "lat": 54.262098001251275,
+    "lon": -8.450083641666355
+  },
+  {
+    "id": "BH-01-08",
+    "x": 570686.501916657,
+    "y": 834901.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 9.43,
+    "karst_risk": "low",
+    "lat": 54.262098574087766,
+    "lon": -8.449930157834531
+  },
+  {
+    "id": "BH-02-01",
+    "x": 570616.501916657,
+    "y": 834911.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 8.48,
+    "karst_risk": "low",
+    "lat": 54.26218441280191,
+    "lon": -8.451005525219632
+  },
+  {
+    "id": "BH-02-02",
+    "x": 570626.501916657,
+    "y": 834911.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 8.95,
+    "karst_risk": "low",
+    "lat": 54.26218498681249,
+    "lon": -8.450852041086298
+  },
+  {
+    "id": "BH-02-03",
+    "x": 570636.501916657,
+    "y": 834911.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 8.83,
+    "karst_risk": "low",
+    "lat": 54.26218556062772,
+    "lon": -8.45069855694758
+  },
+  {
+    "id": "BH-02-04",
+    "x": 570646.501916657,
+    "y": 834911.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 9.64,
+    "karst_risk": "low",
+    "lat": 54.262186134247564,
+    "lon": -8.450545072803497
+  },
+  {
+    "id": "BH-02-05",
+    "x": 570656.501916657,
+    "y": 834911.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 9.23,
+    "karst_risk": "low",
+    "lat": 54.26218670767203,
+    "lon": -8.450391588654059
+  },
+  {
+    "id": "BH-02-06",
+    "x": 570666.501916657,
+    "y": 834911.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 9.49,
+    "karst_risk": "low",
+    "lat": 54.26218728090114,
+    "lon": -8.450238104499242
+  },
+  {
+    "id": "BH-02-07",
+    "x": 570676.501916657,
+    "y": 834911.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 8.94,
+    "karst_risk": "low",
+    "lat": 54.26218785393488,
+    "lon": -8.450084620339068
+  },
+  {
+    "id": "BH-02-08",
+    "x": 570686.501916657,
+    "y": 834911.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 8.63,
+    "karst_risk": "low",
+    "lat": 54.26218842677324,
+    "lon": -8.449931136173545
+  },
+  {
+    "id": "BH-03-01",
+    "x": 570616.501916657,
+    "y": 834921.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 9.1,
+    "karst_risk": "low",
+    "lat": 54.26227426547285,
+    "lon": -8.451006505899981
+  },
+  {
+    "id": "BH-03-02",
+    "x": 570626.501916657,
+    "y": 834921.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 8.39,
+    "karst_risk": "low",
+    "lat": 54.2622748394853,
+    "lon": -8.450853021432934
+  },
+  {
+    "id": "BH-03-03",
+    "x": 570636.501916657,
+    "y": 834921.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 9.49,
+    "karst_risk": "low",
+    "lat": 54.26227541330241,
+    "lon": -8.450699536960515
+  },
+  {
+    "id": "BH-03-04",
+    "x": 570646.501916657,
+    "y": 834921.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 9.21,
+    "karst_risk": "low",
+    "lat": 54.26227598692415,
+    "lon": -8.450546052482725
+  },
+  {
+    "id": "BH-03-05",
+    "x": 570656.501916657,
+    "y": 834921.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 9.39,
+    "karst_risk": "low",
+    "lat": 54.26227656035049,
+    "lon": -8.450392567999556
+  },
+  {
+    "id": "BH-03-06",
+    "x": 570666.501916657,
+    "y": 834921.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 8.81,
+    "karst_risk": "low",
+    "lat": 54.2622771335815,
+    "lon": -8.45023908351104
+  },
+  {
+    "id": "BH-03-07",
+    "x": 570676.501916657,
+    "y": 834921.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 9.7,
+    "karst_risk": "low",
+    "lat": 54.26227770661712,
+    "lon": -8.450085599017159
+  },
+  {
+    "id": "BH-03-08",
+    "x": 570686.501916657,
+    "y": 834921.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 9.59,
+    "karst_risk": "low",
+    "lat": 54.26227827945737,
+    "lon": -8.449932114517903
+  },
+  {
+    "id": "BH-04-01",
+    "x": 570616.501916657,
+    "y": 834931.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 9.42,
+    "karst_risk": "low",
+    "lat": 54.26236411814242,
+    "lon": -8.451007486585723
+  },
+  {
+    "id": "BH-04-02",
+    "x": 570626.501916657,
+    "y": 834931.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 8.58,
+    "karst_risk": "low",
+    "lat": 54.26236469215679,
+    "lon": -8.450854001784956
+  },
+  {
+    "id": "BH-04-03",
+    "x": 570636.501916657,
+    "y": 834931.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 8.97,
+    "karst_risk": "low",
+    "lat": 54.26236526597577,
+    "lon": -8.450700516978815
+  },
+  {
+    "id": "BH-04-04",
+    "x": 570646.501916657,
+    "y": 834931.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 8.36,
+    "karst_risk": "low",
+    "lat": 54.26236583959938,
+    "lon": -8.450547032167307
+  },
+  {
+    "id": "BH-04-05",
+    "x": 570656.501916657,
+    "y": 834931.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 8.52,
+    "karst_risk": "low",
+    "lat": 54.26236641302764,
+    "lon": -8.450393547350435
+  },
+  {
+    "id": "BH-04-06",
+    "x": 570666.501916657,
+    "y": 834931.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 9.28,
+    "karst_risk": "low",
+    "lat": 54.2623669862605,
+    "lon": -8.450240062528197
+  },
+  {
+    "id": "BH-04-07",
+    "x": 570676.501916657,
+    "y": 834931.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 9.37,
+    "karst_risk": "low",
+    "lat": 54.26236755929801,
+    "lon": -8.450086577700596
+  },
+  {
+    "id": "BH-04-08",
+    "x": 570686.501916657,
+    "y": 834931.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 9.69,
+    "karst_risk": "low",
+    "lat": 54.26236813214014,
+    "lon": -8.449933092867633
+  },
+  {
+    "id": "BH-05-01",
+    "x": 570616.501916657,
+    "y": 834941.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 8.77,
+    "karst_risk": "low",
+    "lat": 54.262453970810625,
+    "lon": -8.45100846727682
+  },
+  {
+    "id": "BH-05-02",
+    "x": 570626.501916657,
+    "y": 834941.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 8.83,
+    "karst_risk": "low",
+    "lat": 54.26245454482689,
+    "lon": -8.450854982142333
+  },
+  {
+    "id": "BH-05-03",
+    "x": 570636.501916657,
+    "y": 834941.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 8.98,
+    "karst_risk": "low",
+    "lat": 54.26245511864775,
+    "lon": -8.450701497002473
+  },
+  {
+    "id": "BH-05-04",
+    "x": 570646.501916657,
+    "y": 834941.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 8.57,
+    "karst_risk": "low",
+    "lat": 54.262455692273264,
+    "lon": -8.450548011857256
+  },
+  {
+    "id": "BH-05-05",
+    "x": 570656.501916657,
+    "y": 834941.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 8.49,
+    "karst_risk": "low",
+    "lat": 54.262456265703385,
+    "lon": -8.450394526706665
+  },
+  {
+    "id": "BH-05-06",
+    "x": 570666.501916657,
+    "y": 834941.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 8.98,
+    "karst_risk": "low",
+    "lat": 54.26245683893815,
+    "lon": -8.450241041550706
+  },
+  {
+    "id": "BH-05-07",
+    "x": 570676.501916657,
+    "y": 834941.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 8.63,
+    "karst_risk": "low",
+    "lat": 54.26245741197753,
+    "lon": -8.450087556389397
+  },
+  {
+    "id": "BH-05-08",
+    "x": 570686.501916657,
+    "y": 834941.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 9.27,
+    "karst_risk": "low",
+    "lat": 54.26245798482155,
+    "lon": -8.449934071222714
+  },
+  {
+    "id": "BH-06-01",
+    "x": 570616.501916657,
+    "y": 834951.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 8.93,
+    "karst_risk": "low",
+    "lat": 54.262543823477486,
+    "lon": -8.451009447973293
+  },
+  {
+    "id": "BH-06-02",
+    "x": 570626.501916657,
+    "y": 834951.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 9.5,
+    "karst_risk": "low",
+    "lat": 54.26254439749562,
+    "lon": -8.450855962505095
+  },
+  {
+    "id": "BH-06-03",
+    "x": 570636.501916657,
+    "y": 834951.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 9.31,
+    "karst_risk": "low",
+    "lat": 54.26254497131838,
+    "lon": -8.450702477031513
+  },
+  {
+    "id": "BH-06-04",
+    "x": 570646.501916657,
+    "y": 834951.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 8.75,
+    "karst_risk": "low",
+    "lat": 54.26254554494577,
+    "lon": -8.450548991552575
+  },
+  {
+    "id": "BH-06-05",
+    "x": 570656.501916657,
+    "y": 834951.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 9.5,
+    "karst_risk": "low",
+    "lat": 54.26254611837779,
+    "lon": -8.450395506068254
+  },
+  {
+    "id": "BH-06-06",
+    "x": 570666.501916657,
+    "y": 834951.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 9.46,
+    "karst_risk": "low",
+    "lat": 54.26254669161443,
+    "lon": -8.45024202057859
+  },
+  {
+    "id": "BH-06-07",
+    "x": 570676.501916657,
+    "y": 834951.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 8.86,
+    "karst_risk": "low",
+    "lat": 54.26254726465571,
+    "lon": -8.450088535083543
+  },
+  {
+    "id": "BH-06-08",
+    "x": 570686.501916657,
+    "y": 834951.8456479734,
+    "top_z": 50,
+    "bottom_z": -150,
+    "depth": 200,
+    "formations": [
+      "CDDART"
+    ],
+    "avg_conductivity": 3,
+    "temp_at_bottom": 15.2,
+    "heat_extraction_kW": 8.71,
+    "karst_risk": "low",
+    "lat": 54.2625478375016,
+    "lon": -8.44993504958315
+  }
+]

@@ -1,0 +1,17 @@
+Sligo Geology Viewer
+
+This repository contains source code for a static geological model viewer and
+selected generated/demo data payloads.
+
+Data attribution:
+- Geological, groundwater, geothermal, karst, borehole, and related spatial
+  context may derive from public Irish geoscience and environmental sources,
+  including Geological Survey Ireland and other public agencies.
+- Basemap/satellite imagery is loaded from third-party public tile services at
+  runtime where available and is not redistributed in this repository.
+
+The model is an interpretation for screening and demonstration purposes. It is
+not a certified engineering, drilling, hydrogeological, or planning assessment.
+
+If you publish derived work, review and retain the attribution and license terms
+for any upstream datasets you add or redistribute.

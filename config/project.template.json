@@ -1,0 +1,56 @@
+{
+  "$schema": "./project.schema.json",
+  "schema_version": 1,
+  "project_id": "example-irish-site",
+  "title": "Example Irish Site 3D Geological Model",
+  "subtitle": "Example project - update formation, borehole, and GSI layer counts after rebuild",
+  "site": {
+    "name": "Example Irish Site",
+    "short_name": "Example",
+    "county": "Galway",
+    "country": "Ireland",
+    "car_park_location": {
+      "lat": 53.2707,
+      "lon": -9.0568,
+      "itm_x_approx": 529600,
+      "itm_y_approx": 725000,
+      "source_note": "Replace with the selected site point and source."
+    },
+    "viewer_reference_location": {
+      "lat": 53.2707,
+      "lon": -9.0568,
+      "itm_x": 529600,
+      "itm_y": 725000,
+      "source_note": "Replace with the model metadata reference point after payload rebuild."
+    }
+  },
+  "coordinate_reference_system": {
+    "model": "EPSG:2157",
+    "display": "EPSG:4326"
+  },
+  "model_extent": {
+    "x_min": 522100,
+    "x_max": 537100,
+    "y_min": 717500,
+    "y_max": 732500,
+    "z_min": -300,
+    "z_max": 150
+  },
+  "design_assumptions": {
+    "borehole_count": 48,
+    "borehole_depth_m": 200,
+    "borehole_spacing_m": 10,
+    "array_rows": 6,
+    "array_columns": 8
+  },
+  "data_readiness": {
+    "minimum_raw_gsi_extracts": 20,
+    "requires_self_contained_inputs": true,
+    "requires_lineage_manifest": true,
+    "known_interpretive_limits": [
+      "3D formation surfaces are interpreted from available contacts, structural data, and virtual boreholes.",
+      "Local terrain uses the available generated terrain payload when present; DEM rebuild depends on raw raster availability.",
+      "Replace these caveats with limits specific to the selected site and generated payloads."
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "project_id": "srsc-sligo",
+  "purpose": "Establish baseline conditions for ground source drilling assessment",
+  "audiences": [
+    "council",
+    "engineers",
+    "planners",
+    "drillers"
+  ],
+  "decision": "Confirm whether the proposed closed-loop borehole plan can proceed with appropriate karst and groundwater contingencies",
+  "system_type": "closed_loop",
+  "borehole_design": {
+    "spacing_m": 10,
+    "depth_range_m": [
+      140,
+      200
+    ],
+    "count": 48
+  },
+  "trusted_sources": [
+    "GSI aquifer data",
+    "well data"
+  ],
+  "caveated_sources": [
+    "geophysical data",
+    "geological observations",
+    "interpreted 3D model"
+  ],
+  "required_outputs": [
+    "PDF",
+    "Word",
+    "CSV",
+    "screenshots"
+  ],
+  "critical_data_gaps": [
+    "sparse subsurface data at site",
+    "GPR/services confirmation required"
+  ],
+  "external_evidence_gaps": [
+    "OPW flood maps and past flood events not yet ingested",
+    "Higher-resolution OPW/GSI LiDAR DEM not yet loaded",
+    "EPA groundwater monitoring/status details require review",
+    "GSI groundwater flooding/turlough context requires screening",
+    "Natura/SAC/Appropriate Assessment context requires screening",
+    "GPR/services evidence must be uploaded or confirmed externally"
+  ],
+  "questionnaire_source": {
+    "path": "Ground source questionnaire .xlsx",
+    "captured_at": "2026-05-11",
+    "note": "Seeded from SRSC pilot questionnaire answers and project configuration."
+  }
+}

@@ -1,0 +1,366 @@
+{
+  "source": "Geological Survey Ireland (GSI) - queried 2026-02-22",
+  "query_center": {
+    "itm_x": 570684,
+    "itm_y": 835203
+  },
+  "query_radius_m": 3000,
+  "karst_features": [
+    {
+      "id": "IE_GSI_Karst_40K_1226",
+      "name": "Foxes Den",
+      "type": "Cave",
+      "itm_x": 570217.741,
+      "itm_y": 834215.627,
+      "distance_to_srsc_m": 1091
+    },
+    {
+      "id": "IE_GSI_Karst_40K_9254",
+      "name": "Unnamed Spring",
+      "type": "Spring",
+      "itm_x": 570907.583,
+      "itm_y": 832875.909,
+      "temp_c": 9.5,
+      "distance_to_srsc_m": 2330
+    },
+    {
+      "id": "IE_GSI_Karst_40K_4107",
+      "name": "Tonaforte Swallow Hole",
+      "type": "Swallow Hole",
+      "itm_x": 568248.157,
+      "itm_y": 833085.881,
+      "distance_to_srsc_m": 3040
+    },
+    {
+      "id": "IE_GSI_Karst_40K_2430",
+      "name": "Carrowmore Spring",
+      "type": "Spring",
+      "itm_x": 567348.357,
+      "itm_y": 833885.716,
+      "distance_to_srsc_m": 3570
+    },
+    {
+      "id": "IE_GSI_Karst_40K_6956",
+      "name": "Poulconaperry Spring",
+      "type": "Spring",
+      "itm_x": 568428.108,
+      "itm_y": 831636.189,
+      "distance_to_srsc_m": 4260
+    },
+    {
+      "id": "IE_GSI_Karst_40K_1204",
+      "name": "Tobernaveen Spring",
+      "type": "Spring",
+      "itm_x": 566576.461,
+      "itm_y": 834887.077,
+      "distance_to_srsc_m": 4130
+    },
+    {
+      "id": "IE_GSI_Karst_40K_8229",
+      "name": "Enclosed Depression",
+      "type": "Enclosed Depression",
+      "itm_x": 563226.5,
+      "itm_y": 834467.578,
+      "distance_to_srsc_m": 7480
+    },
+    {
+      "id": "IE_GSI_Karst_40K_8230",
+      "name": "Enclosed Depression 2",
+      "type": "Enclosed Depression",
+      "itm_x": 562735.268,
+      "itm_y": 834256.262,
+      "distance_to_srsc_m": 7970
+    }
+  ],
+  "dye_traces": [
+    {
+      "id": "trace_1",
+      "name": "Tonafortes Sink → Poulcanaperry Spring",
+      "date": "1987-01-03",
+      "tracer": "Leucophor PBS",
+      "result": "Positive",
+      "length_m": 1469,
+      "from": {
+        "itm_x": 568248.157,
+        "itm_y": 833085.881,
+        "name": "Tonaforte Swallow Hole"
+      },
+      "to": {
+        "itm_x": 568428.108,
+        "itm_y": 831636.189,
+        "name": "Poulcanaperry Spring"
+      }
+    },
+    {
+      "id": "trace_2",
+      "name": "Tonafortes Sink → Tobernaveen",
+      "date": "1987-01-03",
+      "tracer": "Leucophor PBS",
+      "result": "Positive",
+      "length_m": 2456,
+      "from": {
+        "itm_x": 568248.157,
+        "itm_y": 833085.881,
+        "name": "Tonaforte Swallow Hole"
+      },
+      "to": {
+        "itm_x": 566576.461,
+        "itm_y": 834887.077,
+        "name": "Tobernaveen Spring"
+      }
+    }
+  ],
+  "structural_measurements": [
+    {
+      "id": "SM-1",
+      "type": "bedding",
+      "strike_deg": 136.9,
+      "dip_deg": 3,
+      "itm_x": 570114,
+      "itm_y": 833438,
+      "description": "Strike & dip, right way up"
+    },
+    {
+      "id": "SM-2",
+      "type": "bedding",
+      "strike_deg": 255.3,
+      "dip_deg": 3,
+      "itm_x": 568132,
+      "itm_y": 835711,
+      "description": "Strike & dip, right way up"
+    },
+    {
+      "id": "SM-3",
+      "type": "bedding",
+      "strike_deg": 55.3,
+      "dip_deg": 30,
+      "itm_x": 572650,
+      "itm_y": 832664,
+      "description": "Strike & dip, right way up"
+    },
+    {
+      "id": "SM-4",
+      "type": "bedding",
+      "strike_deg": 69.4,
+      "dip_deg": 5,
+      "itm_x": 571318,
+      "itm_y": 833638,
+      "description": "Strike & dip, right way up"
+    }
+  ],
+  "groundwater_wells": [
+    {
+      "id": "1733SWW001",
+      "name": "Cleaveragh Demesne",
+      "type": "Borehole",
+      "depth_m": 52.4,
+      "dtb_m": 5.2,
+      "townland": "Cleaveragh Demesne",
+      "itm_x": 570880,
+      "itm_y": 836950,
+      "notes": "Surged @ 10.9 m3/d, geophysical log taken. Nearest borehole to SRSC."
+    },
+    {
+      "id": "1733SWW002",
+      "name": "Kiltycahill BH1",
+      "type": "Borehole",
+      "depth_m": 16.6,
+      "dtb_m": 9.1,
+      "townland": "Kiltycahill",
+      "itm_x": 573690,
+      "itm_y": 835360,
+      "notes": "Bedrock met at 9.1m"
+    },
+    {
+      "id": "1733SWW003",
+      "name": "Kiltycahill BH2",
+      "type": "Borehole",
+      "depth_m": 11.6,
+      "dtb_m": 2.1,
+      "townland": "Kiltycahill",
+      "itm_x": 573630,
+      "itm_y": 835370,
+      "notes": "Bedrock met at 2.1m"
+    },
+    {
+      "id": "1733SWW006",
+      "name": "Kiltycahill BH3",
+      "type": "Borehole",
+      "depth_m": 36.5,
+      "townland": "Kiltycahill",
+      "yield_class": "Failure",
+      "yield_m3d": 2.1,
+      "itm_x": 572960,
+      "itm_y": 835740,
+      "notes": "Failure yield - 2.1 m3/d"
+    },
+    {
+      "id": "1733SWW007",
+      "name": "Rathbraghan BH1",
+      "type": "Borehole",
+      "depth_m": 6.2,
+      "dtb_m": 2,
+      "townland": "Rathbraghan",
+      "water_strike_m": 3.5,
+      "itm_x": 570600,
+      "itm_y": 837390,
+      "notes": "Water strike at 3.5m"
+    },
+    {
+      "id": "1733SWW008",
+      "name": "Rathbraghan BH4",
+      "type": "Borehole",
+      "depth_m": 9,
+      "townland": "Rathbraghan",
+      "water_strike_m": 6.5,
+      "itm_x": 570530,
+      "itm_y": 837420
+    },
+    {
+      "id": "1733SWW009",
+      "name": "Rathbraghan BH3",
+      "type": "Borehole",
+      "depth_m": 21,
+      "dtb_m": 6,
+      "townland": "Rathbraghan",
+      "water_strike_m": 19,
+      "itm_x": 570540,
+      "itm_y": 837480,
+      "notes": "Deepest water strike at 19m"
+    },
+    {
+      "id": "1733SWW010",
+      "name": "Rathbraghan BH2",
+      "type": "Borehole",
+      "depth_m": 6.5,
+      "dtb_m": 0.8,
+      "townland": "Rathbraghan",
+      "water_strike_m": 6,
+      "itm_x": 570100,
+      "itm_y": 837980,
+      "notes": "DTB 0.8m, water strike at 6m"
+    },
+    {
+      "id": "1733SWW012",
+      "name": "Rathbraghan BH5",
+      "type": "Borehole",
+      "depth_m": 7.6,
+      "townland": "Rathbraghan",
+      "water_strike_m": 6.5,
+      "itm_x": 570200,
+      "itm_y": 837950
+    },
+    {
+      "id": "1733SWW015",
+      "name": "Aghamore Near Spring",
+      "type": "Spring",
+      "townland": "Aghamore Near",
+      "yield_class": "High Spring",
+      "yield_m3d": 5000,
+      "itm_x": 570950,
+      "itm_y": 832870,
+      "notes": "Major karst spring - 5000 m3/day"
+    },
+    {
+      "id": "1433SEW008",
+      "name": "Carrickhenry",
+      "type": "Borehole",
+      "depth_m": 46.2,
+      "dtb_m": 1.5,
+      "townland": "Carrickhenry",
+      "itm_x": 568760,
+      "itm_y": 832020
+    },
+    {
+      "id": "1433SEW011",
+      "name": "Tobernaveen Spring",
+      "type": "Spring",
+      "townland": "Tobernaveen",
+      "yield_class": "Intermediate Spring",
+      "yield_m3d": 1120,
+      "itm_x": 566620,
+      "itm_y": 834890
+    }
+  ],
+  "geotechnical_boreholes": [
+    {
+      "report": "R6403",
+      "project": "Ballinode Residential/Commercial",
+      "count": 12,
+      "depth_range": "0.5-2.8m",
+      "bedrock_met": "3 of 12",
+      "itm_x": 571554.2,
+      "itm_y": 836034.1,
+      "pdf_url": "https://secure.decc.gov.ie/goldmine/php/request.php?file=133538242.pdf",
+      "coord_source_note": "Centroid of 12 raw GSI geotechnical borehole point(s) for R6403"
+    },
+    {
+      "report": "R2761",
+      "project": "Water Storage Tank",
+      "count": 3,
+      "depth_range": "9.7-10.0m",
+      "bedrock_met": "3 of 3",
+      "itm_x": 568055,
+      "itm_y": 836684,
+      "pdf_url": "https://secure.decc.gov.ie/goldmine/php/request.php?file=63172859.pdf",
+      "coord_source_note": "Centroid of 3 raw GSI geotechnical borehole point(s) for R2761"
+    },
+    {
+      "report": "R1961",
+      "project": "N4 Sligo-Collooney Road",
+      "count": 2,
+      "depth_range": "9.3-13.7m",
+      "bedrock_met": "2 of 2",
+      "itm_x": 567610.2,
+      "itm_y": 830498.1,
+      "pdf_url": "https://secure.decc.gov.ie/goldmine/php/request.php?file=63178721.pdf",
+      "coord_source_note": "Centroid of 30 raw GSI geotechnical borehole point(s) for R1961"
+    }
+  ],
+  "site_classification": {
+    "bedrock_geology": "Dartry Limestone Formation (CDDART) - dark fine-grained cherty limestone",
+    "aquifer": "Rkc - Regionally Important Aquifer, Karstified (conduit)",
+    "vulnerability": "X - Rock at or near Surface / Karst (74% of area)",
+    "depth_to_bedrock_range": "0.6 - 9.1m (confirmed), up to 13.7m locally",
+    "bedding_dip": "3-5 degrees (near horizontal)",
+    "recharge_mm_yr": "120-679 depending on overburden",
+    "geothermal_suitability": "4/5 Suitable (GSI rating for open-loop systems)",
+    "subsoil": "Till derived from limestone / Made ground"
+  },
+  "gwb_beltra_sligo": {
+    "source": "GSI Beltra-Sligo GWB Description (1st Draft, August 2004)",
+    "pdf_url": "https://gsi.geodata.gov.ie/downloads/Groundwater/Reports/GWB/BeltraSligoGWB.pdf",
+    "area_km2": 46,
+    "gwb_name": "Beltra-Sligo",
+    "hydrometric_area": 35,
+    "elevation_range_mAOD": "0-170",
+    "aquifer_categories_by_formation": {
+      "Ballysodare Limestone (BS)": "Rkc - Regionally Important Karstified (conduit)",
+      "Bundoran Shale (BN)": "Li - Locally Important",
+      "Dartry Limestone (DA)": "Rkc - Regionally Important Karstified (conduit)",
+      "Glencar Limestone (GC)": "Li - Locally Important (Upper Impure Limestones)",
+      "Mullaghmore Sandstone (MU)": "Lm - Locally Important, Moderately Productive",
+      "Red Hill Member (BSh)": "Rkc - Regionally Important Karstified (conduit)"
+    },
+    "transmissivity_m2d": "1 to >2000 (highly variable)",
+    "storativity_percent": "1-2",
+    "groundwater_velocity_m_hr": "20-50",
+    "hydraulic_gradient": ">0.0005",
+    "flow_direction": "Generally north toward coast",
+    "epikarst_thickness_m": "~2 (couple of metres)",
+    "active_karst_zone_depth_m": "~30 (interconnected fissures and conduits)",
+    "overburden_type": "Till (dominant)",
+    "overburden_thickness_m": "<6 (sparse data, n=2)",
+    "recharge_mechanism": "Point (swallow holes) and diffuse (rainfall through permeable subsoil/rock outcrops)",
+    "gw_sw_interaction": "High degree of interconnection between groundwater and surface water",
+    "hydrochemistry": "Expected calcium bicarbonate signature, high alkalinity, hardness and electrical conductivity",
+    "key_structures": "Ox Mountains-Pettigoe Fault (NE-SW) bounds southern side; syncline through GWB; faults trending E-W and NE-SW",
+    "karstification": "Expected widespread despite few recorded features, by analogy with Carrowmore East and West GWBs",
+    "key_references": [
+      "MacDermot, C.V. Long C.B. and Harney S.J (1996) Geology of Sligo-Leitrim. GSI Sheet 7.",
+      "Daly, E. (1975) Report on the groundwater potential of the area around Sligo town. GSI.",
+      "Thorn, R., Drew, D. and Coxon, C. (1990) The Hydrology and Caves of the Geevagh and Bricklieve Karsts, Co. Sligo.",
+      "Thorn, R., Doyle, M., Henry, H. (1986) The Groundwater Resources of South County Sligo."
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "sligo-geology-viewer",
+  "version": "0.1.0",
+  "description": "Static Three.js viewer for an interpreted Sligo Basin geological model.",
+  "private": true,
+  "dependencies": {
+    "proj4": "^2.20.8",
+    "three": "^0.183.2",
+    "three-mesh-bvh": "^0.9.10"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "vite": "^8.0.13"
+  },
+  "scripts": {
+    "dev": "npx vite",
+    "build": "npx vite build",
+    "preview": "npx vite preview",
+    "test": "npx playwright test",
+    "test:e2e": "npx playwright test tests/e2e/smoke.spec.ts",
+    "serve": "python3 -m http.server 9090 --directory output"
+  },
+  "keywords": ["threejs", "geology", "geothermal", "sligo", "digital-twin"],
+  "author": "Conor Mongan",
+  "license": "MIT",
+  "type": "commonjs"
+}

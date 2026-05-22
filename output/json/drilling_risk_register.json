@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "project_id": "srsc-sligo",
+  "risks": [
+    {
+      "id": "karst-collapse",
+      "title": "Karst collapse",
+      "likelihood": "medium",
+      "consequence": "high",
+      "evidence": [
+        "GSI karst features",
+        "GSI dye traces",
+        "interpreted limestone formations"
+      ],
+      "mitigation": "Confirm karst constraints before drilling; plan casing, controlled flushing, grouting, and abandonment criteria for voids or unstable returns.",
+      "affects": [
+        "layout",
+        "drilling_method",
+        "reporting"
+      ]
+    },
+    {
+      "id": "artesian-flow",
+      "title": "Artesian or high groundwater flow",
+      "likelihood": "unknown",
+      "consequence": "high",
+      "evidence": [
+        "GSI groundwater wells",
+        "GSI aquifer data",
+        "karst pathway context"
+      ],
+      "mitigation": "Prepare groundwater control, containment, packer testing, and discharge management before mobilisation.",
+      "affects": [
+        "drilling_method",
+        "reporting",
+        "permitting"
+      ]
+    },
+    {
+      "id": "shallow-bedrock",
+      "title": "Shallow bedrock",
+      "likelihood": "medium",
+      "consequence": "medium",
+      "evidence": [
+        "GSI well depth-to-bedrock records",
+        "geotechnical borehole groups",
+        "subsoil/permeability context"
+      ],
+      "mitigation": "Check shallow obstruction and casing requirements during site investigation and method statement review.",
+      "affects": [
+        "layout",
+        "drilling_method"
+      ]
+    },
+    {
+      "id": "fault-karst-pathway",
+      "title": "Fault or fracture pathway",
+      "likelihood": "medium",
+      "consequence": "high",
+      "evidence": [
+        "interpreted faults",
+        "structural measurements",
+        "mapped karst features"
+      ],
+      "mitigation": "Avoid placing boreholes directly on interpreted pathway corridors where practical; confirm with GI and drilling observations.",
+      "affects": [
+        "layout",
+        "drilling_method",
+        "reporting"
+      ]
+    },
+    {
+      "id": "services-conflict",
+      "title": "Buried services conflict",
+      "likelihood": "unknown",
+      "consequence": "high",
+      "evidence": [
+        "design borehole field",
+        "GPR/services confirmation gap"
+      ],
+      "mitigation": "Complete utility searches, CAT scan, and GPR/services survey before final collar locations are issued.",
+      "affects": [
+        "layout",
+        "drilling_method"
+      ]
+    },
+    {
+      "id": "sparse-site-data",
+      "title": "Sparse direct site data",
+      "likelihood": "high",
+      "consequence": "medium",
+      "evidence": [
+        "lineage manifest",
+        "limited direct subsurface control at SRSC"
+      ],
+      "mitigation": "Use the prognosis as screening only until confirmed by trial holes, GI logs, and thermal response testing.",
+      "affects": [
+        "reporting",
+        "layout"
+      ]
+    },
+    {
+      "id": "model-edge-effects",
+      "title": "Model edge effects",
+      "likelihood": "medium",
+      "consequence": "medium",
+      "evidence": [
+        "model extent",
+        "interpreted 3D model"
+      ],
+      "mitigation": "Flag low-confidence model-boundary or sparse-control zones and avoid over-reading precise contacts near edges.",
+      "affects": [
+        "reporting",
+        "layout"
+      ]
+    },
+    {
+      "id": "regulatory-ecology",
+      "title": "Regulatory and ecology screening",
+      "likelihood": "unknown",
+      "consequence": "high",
+      "evidence": [
+        "Natura/SAC screening gap",
+        "groundwater and discharge context"
+      ],
+      "mitigation": "Complete Appropriate Assessment screening and permitting review where works, discharge, or protected sites may be affected.",
+      "affects": [
+        "permitting",
+        "reporting"
+      ]
+    }
+  ]
+}

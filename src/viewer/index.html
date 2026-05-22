@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRSC Sligo 3D Geological Model</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230c1117'/%3E%3Cpath d='M14 19h36v8H14zm0 11h36v8H14zm0 11h24v8H14z' fill='%2358a6ff'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="loading">
+        <div class="loader"></div>
+        <h1>SRSC Sligo Geothermal Model</h1>
+        <p>GEMINI Project &mdash; 3D Geological + Thermal Model</p>
+        <div id="load-status">Loading geological data...</div>
+        <div class="load-progress-bar"><div class="fill" id="load-progress-fill"></div></div>
+        <div id="load-progress-text"></div>
+    </div>
+
+    <div id="canvas-container"></div>
+
+    <div id="top-bar">
+        <button class="mobile-toggle" id="toggle-strat" title="Stratigraphic column" aria-label="Toggle stratigraphic column">&#9776;</button>
+        <h1>SRSC Sligo 3D Geological Model</h1>
+        <span class="subtitle">GEMINI Project &bull; 7 formations &bull; 48 boreholes &bull; 18 GSI data layers</span>
+        <div class="spacer"></div>
+        <button class="view-btn active" data-view="overview">Overview</button>
+        <button class="view-btn" data-view="ew-section">E-W Section</button>
+        <button class="view-btn" data-view="ns-section">N-S Section</button>
+        <button class="view-btn" data-view="proposed-site">Proposed Site</button>
+        <button class="view-btn" data-view="boreholes">Borehole Array</button>
+        <button class="view-btn" data-view="top">Plan View</button>
+        <button class="action-btn" id="btn-measure" title="Measure distance">&#128207; Measure</button>
+        <button class="action-btn" id="btn-screenshot" title="Save screenshot">&#128247; Export</button>
+        <button class="action-btn" id="btn-assessment" title="SRSC assessment summary">&#128203; Assessment</button>
+        <button class="action-btn" id="btn-prognosis" title="Drilling prognosis and risks">&#128679; Prognosis</button>
+        <button class="action-btn" id="btn-provenance" title="Data provenance &amp; integrity">&#128202; Data</button>
+        <button class="action-btn" id="btn-ontology" title="Ontology source inventory">&#128218; Sources</button>
+        <button class="mobile-toggle" id="toggle-controls" title="Controls panel" aria-label="Toggle controls panel">&#9881;</button>
+    </div>
+
+    <div id="mobile-backdrop"></div>
+
+    <div id="strat-panel">
+        <div class="panel-header">Stratigraphic Column</div>
+        <input type="text" id="formation-search" placeholder="Search formations...">
+        <div class="strat-column" id="strat-column"></div>
+    </div>
+
+    <div id="controls-panel">
+        <div class="control-section">
+            <h4>Mode</h4>
+            <div class="mode-grid" aria-label="Viewer modes">
+                <button class="mode-btn active" id="mode-overview" data-mode="overview" type="button" title="Terrain plus site geology evidence without regional subsurface sheets">Overview</button>
+                <button class="mode-btn" id="mode-risk" data-mode="risk" type="button" title="Drilling risk evidence without subsurface sheets">Drilling Risk</button>
+                <button class="mode-btn" id="mode-proposed" data-mode="proposed" type="button" title="Proposed BHE field cutaway with subsurface design volume">Proposed Site</button>
+                <button class="mode-btn" id="mode-subsurface" data-mode="subsurface" type="button" title="Show interpreted subsurface geology and sections">Subsurface</button>
+                <button class="mode-btn" id="mode-subsurface-lab" data-mode="subsurface-lab" type="button" title="Subsurface analysis view with slice, section clip, and depth log">Subsurface Lab</button>
+                <button class="mode-btn" id="mode-data-trust" data-mode="data-trust" type="button" title="Compare observed, processed, interpreted, and design evidence">Data Trust</button>
+                <button class="mode-btn" id="mode-free-roam" data-mode="free-roam" type="button" title="Keep the current camera and explore all site evidence freely">Free Roam</button>
+                <button class="mode-btn" id="mode-planning" data-mode="planning" type="button" title="Clean layout view for review and export">Planning</button>
+            </div>
+        </div>
+        <div class="control-section">
+            <h4>Display</h4>
+            <div class="control-row">
+                <label>Vertical Exaggeration</label>
+                <span class="val" id="ve-val">3x</span>
+            </div>
+            <input type="range" id="vert-exag" min="1" max="10" value="3" step="0.5" aria-label="Vertical exaggeration">
+            <div class="control-row" style="margin-top: 8px">
+                <label>Formation Opacity</label>
+                <span class="val" id="fo-val">62%</span>
+            </div>
+            <input type="range" id="fm-opacity" min="0" max="100" value="62" aria-label="Formation opacity">
+            <div class="toggle-row" style="margin-top: 8px">
+                <input type="checkbox" id="tog-geology-surfaces">
+                <span class="color-pip" style="background:#58a6ff"></span>
+                <label for="tog-geology-surfaces" title="Interpreted regional sheets; best used in Subsurface, section, or Proposed Site views">3D geology sheets (subsurface)</label>
+            </div>
+            <div class="toggle-row" style="margin-top: 8px">
+                <input type="checkbox" id="tog-terrain" checked>
+                <span class="color-pip" style="background:linear-gradient(90deg,#3b7a3b,#8B7355,#9a9a9a)"></span>
+                <label for="tog-terrain" title="Draped satellite terrain surface">Terrain</label>
+            </div>
+            <div style="margin-top:4px">
+                <div class="control-row">
+                    <label>Terrain Opacity</label>
+                    <span class="val" id="tro-val">90%</span>
+                </div>
+                <input type="range" id="terrain-opacity" min="0" max="100" value="90" aria-label="Terrain opacity">
+            </div>
+        </div>
+        <div class="control-section">
+            <h4>Overlays</h4>
+            <div class="toggle-row">
+                <input type="checkbox" id="tog-faults">
+                <span class="color-pip" style="background:#da3633"></span>
+                <label for="tog-faults" title="Interpreted 3D fault sheets, not surface linework">3D fault sheets (80)</label>
+            </div>
+            <div class="toggle-row">
+                <input type="checkbox" id="tog-boreholes" checked>
+                <span class="color-pip" style="background:#3fb950"></span>
+                <label for="tog-boreholes" title="Conceptual closed-loop borehole heat exchangers">Design BHEs (48)</label>
+            </div>
+            <div class="toggle-row">
+                <input type="checkbox" id="tog-proposed-site" checked>
+                <span class="color-pip" style="background:#7ee787"></span>
+                <label for="tog-proposed-site" title="Proposed surface footprint and 200m subsurface design envelope">Proposed site volume</label>
+            </div>
+            <div class="toggle-row">
+                <input type="checkbox" id="tog-srsc" checked>
+                <span class="color-pip" style="background:#f85149"></span>
+                <label for="tog-srsc">SRSC Marker</label>
+            </div>
+            <div class="toggle-row">
+                <input type="checkbox" id="tog-satellite" checked>
+                <span class="color-pip" style="background:#58a6ff"></span>
+                <label for="tog-satellite">Satellite <span id="sat-status" style="color:#484f58;font-size:10px">Loading...</span></label>
+            </div>
+            <div style="margin-top:6px">
+                <div class="control-row">
+                    <label>Fault Opacity</label>
+                    <span class="val" id="fao-val">30%</span>
+                </div>
+                <input type="range" id="fault-opacity" min="0" max="100" value="30" aria-label="Fault opacity">
+            </div>
+            <div style="margin-top:4px">
+                <div class="control-row">
+                    <label>Satellite Opacity</label>
+                    <span class="val" id="sao-val">90%</span>
+                </div>
+                <input type="range" id="sat-opacity" min="0" max="100" value="90" aria-label="Satellite opacity">
+            </div>
+        </div>
+        <div class="control-section">
+            <h4>GSI Real-World Data</h4>
+            <button class="risk-preset-btn" id="btn-risk-view" type="button">Apply Drilling Risk Mode</button>
+            <div class="toggle-row">
+                <input type="checkbox" id="tog-karst" checked>
+                <span class="color-pip" style="background:#f0883e"></span>
+                <label for="tog-karst">Karst Features</label>
+            </div>
+            <div class="toggle-row">
+                <input type="checkbox" id="tog-dyetraces" checked>
+                <span class="color-pip" style="background:#a371f7"></span>
+                <label for="tog-dyetraces" title="GSI dye-trace evidence: interpreted groundwater/karst pathway, static screening context">Dye Traces</label>
+            </div>
+            <div class="toggle-row">
+                <input type="checkbox" id="tog-gsi-wells" checked>
+                <span class="color-pip" style="background:#79c0ff"></span>
+                <label for="tog-gsi-wells">GSI Wells/Springs</label>
+            </div>
+            <div class="toggle-row">
+                <input type="checkbox" id="tog-geotech" checked>
+                <span class="color-pip" style="background:#d2a8ff"></span>
+                <label for="tog-geotech">Geotech Sites <span id="geotech-hidden-note" class="layer-count-note"></span></label>
+            </div>
+            <div class="toggle-row">
+                <input type="checkbox" id="tog-structural">
+                <span class="color-pip" style="background:#ffa657"></span>
+                <label for="tog-structural">Dip/Strike</label>
+            </div>
+            <div class="toggle-row">
+                <input type="checkbox" id="tog-thermal-cond">
+                <span class="color-pip" style="background:#ff6b35"></span>
+                <label for="tog-thermal-cond">Thermal Conductivity</label>
+            </div>
+            <div class="toggle-row">
+                <input type="checkbox" id="tog-temp-depth">
+                <span class="color-pip" style="background:#e63946"></span>
+                <label for="tog-temp-depth">Temperature at Depth</label>
+            </div>
+            <div class="toggle-row">
+                <input type="checkbox" id="tog-heat-flow">
+                <span class="color-pip" style="background:#ff00ff"></span>
+                <label for="tog-heat-flow">Heat Flow (DIAS)</label>
+            </div>
+            <div class="toggle-row">
+                <input type="checkbox" id="tog-hist-inv">
+                <span class="color-pip" style="background:#b8860b"></span>
+                <label for="tog-hist-inv">IGSL Investigations</label>
+            </div>
+        </div>
+        <div class="control-section">
+            <h4>Surface Overlays</h4>
+            <div class="toggle-row">
+                <input type="radio" name="surface-overlay" id="tog-vulnerability" value="vulnerability">
+                <span class="color-pip" style="background:linear-gradient(90deg,#d73027,#fc8d59,#fee08b,#91cf60)"></span>
+                <label for="tog-vulnerability">GW Vulnerability</label>
+            </div>
+            <div class="toggle-row">
+                <input type="radio" name="surface-overlay" id="tog-subsoil" value="subsoil">
+                <span class="color-pip" style="background:linear-gradient(90deg,#2166ac,#67a9cf,#d1e5f0)"></span>
+                <label for="tog-subsoil">Subsoil Permeability</label>
+            </div>
+            <div class="toggle-row">
+                <input type="radio" name="surface-overlay" id="tog-aquifer" value="aquifer">
+                <span class="color-pip" style="background:linear-gradient(90deg,#1a9850,#a6d96a,#fee08b)"></span>
+                <label for="tog-aquifer">Aquifer Classification</label>
+            </div>
+            <div class="toggle-row">
+                <input type="radio" name="surface-overlay" id="tog-gshp-closed" value="gshp-closed">
+                <span class="color-pip" style="background:linear-gradient(90deg,#1a9850,#a6d96a,#fdae61,#d73027)"></span>
+                <label for="tog-gshp-closed">GSHP Suitability (Closed)</label>
+            </div>
+            <div class="toggle-row">
+                <input type="radio" name="surface-overlay" id="tog-gshp-open-dom" value="gshp-open-dom">
+                <span class="color-pip" style="background:linear-gradient(90deg,#1a9850,#fee08b,#d73027)"></span>
+                <label for="tog-gshp-open-dom">GSHP Open-Loop (Domestic)</label>
+            </div>
+            <div class="toggle-row">
+                <input type="radio" name="surface-overlay" id="tog-gshp-open-com" value="gshp-open-com">
+                <span class="color-pip" style="background:linear-gradient(90deg,#1a9850,#fee08b,#d73027)"></span>
+                <label for="tog-gshp-open-com">GSHP Open-Loop (Commercial)</label>
+            </div>
+            <div class="toggle-row">
+                <input type="radio" name="surface-overlay" id="tog-quaternary" value="quaternary">
+                <span class="color-pip" style="background:linear-gradient(90deg,#8B7355,#D2B48C,#BDB76B)"></span>
+                <label for="tog-quaternary">Quaternary Sediments</label>
+            </div>
+            <div class="toggle-row">
+                <input type="radio" name="surface-overlay" id="tog-hydrostrat" value="hydrostrat">
+                <span class="color-pip" style="background:linear-gradient(90deg,#DEB887,#87CEEB,#6495ED)"></span>
+                <label for="tog-hydrostrat">Hydrostratigraphic</label>
+            </div>
+            <div class="toggle-row">
+                <input type="radio" name="surface-overlay" id="tog-landslide-susc" value="landslide-susc">
+                <span class="color-pip" style="background:linear-gradient(90deg,#1a9850,#fee08b,#d73027)"></span>
+                <label for="tog-landslide-susc">Landslide Susceptibility</label>
+            </div>
+            <div class="toggle-row">
+                <input type="radio" name="surface-overlay" id="tog-geoheritage" value="geoheritage">
+                <span class="color-pip" style="background:#DDA0DD"></span>
+                <label for="tog-geoheritage">Geoheritage Sites</label>
+            </div>
+            <div class="toggle-row">
+                <input type="radio" name="surface-overlay" id="tog-recharge" value="recharge">
+                <span class="color-pip" style="background:linear-gradient(90deg,#0571b0,#92c5de,#f7f7f7)"></span>
+                <label for="tog-recharge">GW Recharge</label>
+            </div>
+            <div class="toggle-row">
+                <input type="radio" name="surface-overlay" id="tog-source-protection" value="source-protection">
+                <span class="color-pip" style="background:#006d77"></span>
+                <label for="tog-source-protection">Source Protection</label>
+            </div>
+            <div class="toggle-row">
+                <input type="radio" name="surface-overlay" id="tog-epa-gw-status" value="epa-gw-status">
+                <span class="color-pip" style="background:linear-gradient(90deg,#2ca25f,#fee08b,#d73027)"></span>
+                <label for="tog-epa-gw-status">EPA GW Status</label>
+            </div>
+            <div class="toggle-row">
+                <input type="radio" name="surface-overlay" id="tog-overlay-none" value="none" checked>
+                <label for="tog-overlay-none" style="color:#484f58">None</label>
+            </div>
+        </div>
+        <div class="control-section">
+            <h4>Geology Markers</h4>
+            <div class="toggle-row">
+                <input type="checkbox" id="tog-bedrock-geol">
+                <span class="color-pip" style="background:#ffa657"></span>
+                <label for="tog-bedrock-geol">Bedrock Strike/Dip</label>
+            </div>
+            <div class="toggle-row">
+                <input type="checkbox" id="tog-bedrock-bh">
+                <span class="color-pip" style="background:#7ee787"></span>
+                <label for="tog-bedrock-bh">Verified Boreholes</label>
+            </div>
+            <div class="toggle-row">
+                <input type="checkbox" id="tog-bedrock-bh-unverified">
+                <span class="color-pip" style="background:#d29922"></span>
+                <label for="tog-bedrock-bh-unverified">Unverified Boreholes</label>
+            </div>
+            <div class="toggle-row">
+                <input type="checkbox" id="tog-bedrock-cross-sections">
+                <span class="color-pip" style="background:#f778ba"></span>
+                <label for="tog-bedrock-cross-sections">GSI Cross-Section</label>
+            </div>
+            <div class="toggle-row">
+                <input type="checkbox" id="tog-landslide-locs">
+                <span class="color-pip" style="background:#f85149"></span>
+                <label for="tog-landslide-locs">Landslide Events</label>
+            </div>
+            <div class="toggle-row">
+                <input type="checkbox" id="tog-minerals">
+                <span class="color-pip" style="background:#DDA0DD"></span>
+                <label for="tog-minerals">Mineral Occurrences</label>
+            </div>
+        </div>
+        <div class="control-section">
+            <h4>Layer Explorer</h4>
+            <div class="control-row">
+                <label>Explode Layers</label>
+                <span class="val" id="ex-val">0</span>
+            </div>
+            <input type="range" id="explode-layers" min="0" max="100" value="0" aria-label="Explode layers">
+            <div style="margin-top:6px">
+                <div class="control-row">
+                    <label>Depth Slice</label>
+                    <span class="val" id="ds-val">Off</span>
+                </div>
+                <input type="range" id="depth-slice" min="-300" max="50" value="-100" step="5" aria-label="Depth slice">
+                <div class="toggle-row" style="margin-top:4px">
+                    <input type="checkbox" id="tog-depthslice">
+                    <label for="tog-depthslice">Show depth slice</label>
+                </div>
+                <div class="toggle-row">
+                    <input type="checkbox" id="tog-srsc-col">
+                    <label for="tog-srsc-col">SRSC formation column</label>
+                </div>
+            </div>
+        </div>
+        <div class="control-section">
+            <h4>Cross-Section Clip</h4>
+            <div class="control-row">
+                <label>Clip Position</label>
+                <span class="val" id="clip-val">Off</span>
+            </div>
+            <input type="range" id="clip-pos" min="0" max="100" value="50" aria-label="Clip position">
+            <div style="margin-top: 4px">
+                <div class="toggle-row">
+                    <input type="checkbox" id="tog-clip">
+                    <label for="tog-clip">Enable E-W clip</label>
+                </div>
+                <div class="toggle-row">
+                    <input type="checkbox" id="tog-clip-ns">
+                    <label for="tog-clip-ns">Enable N-S clip</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="bottom-bar">
+        <div id="thermal-card">
+            <h4>Borehole Array &mdash; Heat Extraction</h4>
+            <div class="thermal-grid" id="thermal-grid"></div>
+        </div>
+        <div id="scale-bar">
+            <div class="scale-line"></div>
+            <div class="scale-text">1 km</div>
+        </div>
+    </div>
+
+    <div id="site-card">
+        <h4>GSI Site Classification &mdash; SRSC</h4>
+        <div id="site-card-body"></div>
+    </div>
+
+    <div id="overlay-legend" aria-live="polite">
+        <h5 id="legend-title">Surface legend</h5>
+        <div id="legend-items"></div>
+    </div>
+
+    <div id="compass">
+        <svg viewBox="0 0 64 64" id="compass-svg">
+            <circle cx="32" cy="32" r="28" fill="none" stroke="#30363d" stroke-width="1"/>
+            <polygon points="32,8 36,28 32,24 28,28" fill="#f85149" opacity="0.9"/>
+            <polygon points="32,56 36,36 32,40 28,36" fill="#484f58"/>
+            <text x="32" y="7" text-anchor="middle" font-size="8" fill="#f85149" font-weight="600" font-family="Inter,sans-serif">N</text>
+        </svg>
+    </div>
+
+    <div id="help-hint">
+        Scroll to zoom &middot; Drag to rotate &middot; Right-drag to pan &middot; <kbd>Shift</kbd> + <kbd>Double-click</kbd> to sample
+    </div>
+
+    <div id="info-panel">
+        <div class="ip-header">
+            <span class="ip-title" id="ip-title"></span>
+            <button class="ip-close" id="ip-close">&times;</button>
+        </div>
+        <div id="ip-body"></div>
+    </div>
+
+    <div id="drill-panel">
+        <div class="dp-header">
+            <span class="dp-title" id="drill-title">Virtual Borehole</span>
+            <span style="flex:1"></span>
+            <button class="dp-export" id="drill-export" title="Export site assessment report">Export PDF</button>
+            <button class="dp-close" id="drill-close">&times;</button>
+        </div>
+        <div id="drill-body"></div>
+    </div>
+
+    <div id="subsurface-panel" aria-label="Subsurface interpretation panel">
+        <div class="subsurface-header">
+            <div>
+                <div class="subsurface-kicker">Subsurface Interpretation</div>
+                <h3>Voxel section and evidence log</h3>
+            </div>
+            <button class="subsurface-close" id="subsurface-close">&times;</button>
+        </div>
+        <div class="subsurface-axis">
+            <button class="subsurface-axis-btn active" data-axis="ew" type="button">E-W</button>
+            <button class="subsurface-axis-btn" data-axis="ns" type="button">N-S</button>
+        </div>
+        <canvas id="subsurface-section-canvas" width="520" height="220"></canvas>
+        <div class="subsurface-caption" id="subsurface-section-caption"></div>
+        <div class="subsurface-grid">
+            <section>
+                <h4>Design-focus strat log</h4>
+                <div id="subsurface-log"></div>
+            </section>
+            <section>
+                <h4>Confidence notes</h4>
+                <div id="subsurface-evidence"></div>
+            </section>
+        </div>
+    </div>
+
+    <div id="data-sources">
+        Observed/processed data: GSI, NASA, Esri &bull;
+        3D geology: interpreted model &bull;
+        Borehole array: design scenario &bull; EPSG:2157 ITM
+    </div>
+
+    <div id="trust-legend" aria-label="Data trust legend">
+        <span class="trust-title">Data trust</span>
+        <span class="trust-chip trust-observed">Observed</span>
+        <span class="trust-chip trust-processed">Processed</span>
+        <span class="trust-chip trust-interpreted">Interpreted</span>
+        <span class="trust-chip trust-design">Design</span>
+    </div>
+
+    <div id="assessment-panel">
+        <div class="ass-header">
+            <h3>&#128203; SRSC Assessment</h3>
+            <button class="ass-close" id="assessment-close">&times;</button>
+        </div>
+        <div class="ass-body" id="assessment-body"></div>
+        <div class="ass-footer">
+            <span>Observed / processed / interpreted / design claims are labelled per item.</span>
+            <button class="ass-download" id="assessment-download" type="button">Download HTML</button>
+        </div>
+    </div>
+
+    <div id="prognosis-panel">
+        <div class="ass-header">
+            <h3>&#128679; Prognosis</h3>
+            <button class="ass-close" id="prognosis-close">&times;</button>
+        </div>
+        <div class="ass-body" id="prognosis-body"></div>
+        <div class="ass-footer">
+            <span>Evidence tags distinguish observed, official, processed, interpreted, and design information.</span>
+            <div class="prog-actions">
+                <button class="ass-download" id="prognosis-csv" type="button">Download CSV</button>
+                <button class="ass-download" id="prognosis-download" type="button">Download HTML</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="provenance-panel">
+        <div class="prov-header">
+            <h3>&#128202; Data Provenance <span class="prov-summary" id="prov-summary"></span></h3>
+            <button class="prov-close" id="prov-close">&times;</button>
+        </div>
+        <div class="prov-body" id="prov-body"></div>
+        <div class="prov-footer">
+            <div class="prov-stats" id="prov-stats"></div>
+            <span>EPSG:2157 ITM · All data © respective agencies</span>
+        </div>
+    </div>
+
+    <div id="ontology-panel">
+        <div class="ont-header">
+            <h3>&#128218; Source Inventory <span class="ont-summary" id="ont-summary"></span></h3>
+            <div style="display:flex;align-items:center;gap:8px;">
+                <button class="ont-close" id="ont-close">&times;</button>
+            </div>
+        </div>
+        <div class="ont-body" id="ont-body"></div>
+        <div class="ont-footer">
+            <div class="ont-stats" id="ont-stats"></div>
+            <span>Ontology Copilot &middot; All data &copy; respective agencies</span>
+        </div>
+    </div>
+
+    <button id="chat-toggle" title="Static Model Guide">&#128172;</button>
+    <div id="chat-panel">
+        <div id="chat-header">
+            <span>Model Guide <span class="chat-status" id="chat-status">static</span></span>
+            <button id="chat-close">&times;</button>
+        </div>
+        <div id="chat-messages"></div>
+        <div id="chat-input-area">
+            <textarea id="chat-input" placeholder="Ask about using this static model..." rows="1"></textarea>
+            <button id="chat-send">Send</button>
+        </div>
+    </div>
+
+    <div id="measure-label"></div>
+    <div id="section-label"></div>
+    <div id="tooltip"></div>
+    <script type="module" src="./main.js"></script>
+    <script>
+    // Mobile panel toggle logic
+    (function() {
+        const stratBtn = document.getElementById('toggle-strat');
+        const ctrlBtn = document.getElementById('toggle-controls');
+        const strat = document.getElementById('strat-panel');
+        const ctrl = document.getElementById('controls-panel');
+        const backdrop = document.getElementById('mobile-backdrop');
+
+        function closeAll() {
+            strat.classList.remove('mobile-open');
+            ctrl.classList.remove('mobile-open');
+            backdrop.classList.remove('active');
+        }
+
+        stratBtn.addEventListener('click', function() {
+            const opening = !strat.classList.contains('mobile-open');
+            closeAll();
+            if (opening) {
+                strat.classList.add('mobile-open');
+                backdrop.classList.add('active');
+            }
+        });
+
+        ctrlBtn.addEventListener('click', function() {
+            const opening = !ctrl.classList.contains('mobile-open');
+            closeAll();
+            if (opening) {
+                ctrl.classList.add('mobile-open');
+                backdrop.classList.add('active');
+            }
+        });
+
+        backdrop.addEventListener('click', closeAll);
+    })();
+    </script>
+</body>
+</html>

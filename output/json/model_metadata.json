@@ -1,0 +1,81 @@
+{
+  "project": "SRSC Sligo Geothermal 3D Model",
+  "coordinate_system": "ITM (EPSG:2157)",
+  "extent": {
+    "x_min": 563183.868302733,
+    "x_max": 578183.868302733,
+    "y_min": 827702.5130515776,
+    "y_max": 842702.5130515776,
+    "z_min": -300,
+    "z_max": 150
+  },
+  "srsc_location": {
+    "itm_x": 570651.5019166571,
+    "itm_y": 834926.8456479734,
+    "lat": 54.2623212,
+    "lon": -8.4504698
+  },
+  "formations": [
+    {
+      "code": "CDDART",
+      "name": "Dartry Limestone Formation",
+      "color": "#4a7fb5",
+      "order": 0,
+      "conductivity": 3.0,
+      "thickness_typical": 200
+    },
+    {
+      "code": "CDGLCR",
+      "name": "Glencar Limestone",
+      "color": "#7eb5d6",
+      "order": 1,
+      "conductivity": 3.0,
+      "thickness_typical": 80
+    },
+    {
+      "code": "CDBNBN",
+      "name": "Benbulben Shale",
+      "color": "#6b6b6b",
+      "order": 2,
+      "conductivity": 1.8,
+      "thickness_typical": 90
+    },
+    {
+      "code": "CDLSGM",
+      "name": "Lisgorman Shale Formation",
+      "color": "#8c8c8c",
+      "order": 3,
+      "conductivity": 1.8,
+      "thickness_typical": 75
+    },
+    {
+      "code": "CDBDRN",
+      "name": "Bundoran Shale",
+      "color": "#a3a3a3",
+      "order": 4,
+      "conductivity": 1.8,
+      "thickness_typical": 45
+    },
+    {
+      "code": "CDMGRE",
+      "name": "Mullaghmore Sandstone",
+      "color": "#d4a843",
+      "order": 5,
+      "conductivity": 2.5,
+      "thickness_typical": 75
+    },
+    {
+      "code": "CDBLSD",
+      "name": "Ballysodare Limestone",
+      "color": "#c4a882",
+      "order": 6,
+      "conductivity": 3.0,
+      "thickness_typical": 200
+    }
+  ],
+  "resolution": [
+    80,
+    80,
+    60
+  ]
+}

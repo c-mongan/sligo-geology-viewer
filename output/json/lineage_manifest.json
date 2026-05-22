@@ -1,0 +1,854 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-05-19T10:21:00+00:00",
+  "project": "SRSC Sligo 3D Geological Model",
+  "project_config": "output/json/project_config.json",
+  "project_config_source": "config/project.srsc.json",
+  "model_extent_crs": "EPSG:2157",
+  "summary": {
+    "viewer_outputs": 44,
+    "raw_gsi_extracts": 28,
+    "model_inputs": 5,
+    "external_symlink_inputs": 0,
+    "rebuild_self_contained": true,
+    "project_config_present": true
+  },
+  "confidence_scale": {
+    "high": "Official extract or source catalogue with direct provenance.",
+    "medium_high": "Official-source data that has been clipped, simplified, or transformed.",
+    "medium": "Generated interpretation or design output with documented assumptions.",
+    "low": "Sparse, synthetic, or weakly constrained data."
+  },
+  "model_inputs": [
+    {
+      "name": "formation_contacts.csv",
+      "path": "data/input/formation_contacts.csv",
+      "is_symlink": false,
+      "symlink_target": null,
+      "resolved_exists": true,
+      "record_count": 20949,
+      "sha256": "34e042e05c122c03eb7242f46ac21a72c13a785ec10c1ca9e2979a4e939ad74c",
+      "size_bytes": 2066428
+    },
+    {
+      "name": "structural_data.csv",
+      "path": "data/input/structural_data.csv",
+      "is_symlink": false,
+      "symlink_target": null,
+      "resolved_exists": true,
+      "record_count": 75,
+      "sha256": "9415ecc150fff091420337cb5a292211748b48fab4489bb4c03e0407e46d60a7",
+      "size_bytes": 7517
+    },
+    {
+      "name": "faults.csv",
+      "path": "data/input/faults.csv",
+      "is_symlink": false,
+      "symlink_target": null,
+      "resolved_exists": true,
+      "record_count": 97,
+      "sha256": "0d67fd63745f4f295f63c96865e729df2c85703815fa8585ab2977e869790b3a",
+      "size_bytes": 77714
+    },
+    {
+      "name": "boreholes_unified.csv",
+      "path": "data/input/boreholes_unified.csv",
+      "is_symlink": false,
+      "symlink_target": null,
+      "resolved_exists": true,
+      "record_count": 41,
+      "sha256": "09daf770e728e7674ff1b2fc5c7f6eeca139173d25277f744d30d0a2ea6155d3",
+      "size_bytes": 3974
+    },
+    {
+      "name": "karst_features.csv",
+      "path": "data/input/karst_features.csv",
+      "is_symlink": false,
+      "symlink_target": null,
+      "resolved_exists": true,
+      "record_count": 30,
+      "sha256": "b4a98c6f436e7f1aeafe8743a614fcd12f288dc204ff167649061a849c97e8bf",
+      "size_bytes": 3573
+    }
+  ],
+  "raw_gsi_extracts": [
+    {
+      "name": "aquifer.geojson",
+      "path": "data/gsi_raw/aquifer.geojson",
+      "record_count": 19,
+      "sha256": "775816187e862293e6b649d99ce85c8a83bf9ca561f999ee4ba1fbeaaa606f1d",
+      "size_bytes": 358151,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "bedrock_boreholes_unverified.geojson",
+      "path": "data/gsi_raw/bedrock_boreholes_unverified.geojson",
+      "record_count": 16,
+      "sha256": "2a186b65ca4a3322372506c026d2c51bb744e922b947eaca53e2e844f530166d",
+      "size_bytes": 12090,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "bedrock_boreholes_verified.geojson",
+      "path": "data/gsi_raw/bedrock_boreholes_verified.geojson",
+      "record_count": 6,
+      "sha256": "8fda83bdc53e83a5415fa2eec483270b1ecf26d1cab3135cdb34577729da3a80",
+      "size_bytes": 2859,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "bedrock_cross_sections.geojson",
+      "path": "data/gsi_raw/bedrock_cross_sections.geojson",
+      "record_count": 1,
+      "sha256": "1d863bc9deba4ba596f40f0c22d3a09c629b5e4c709181b8ceaa6cf243484e46",
+      "size_bytes": 1278,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "bedrock_geology.geojson",
+      "path": "data/gsi_raw/bedrock_geology.geojson",
+      "record_count": 165,
+      "sha256": "2d8714d340d908d948c7e0f6732620b468bc79899977086bb9bec04d39bea044",
+      "size_bytes": 39212,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "geoheritage.geojson",
+      "path": "data/gsi_raw/geoheritage.geojson",
+      "record_count": 15,
+      "sha256": "989841c548ee2bd10b4ce31bc9a8606f5ceaa9875913d57dc79fd874210b6ee2",
+      "size_bytes": 32262,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "geotech_boreholes.geojson",
+      "path": "data/gsi_raw/geotech_boreholes.geojson",
+      "record_count": 81,
+      "sha256": "77c58369220d31729d8ec9d29df6b44e9512c773773ea6c75310b62670713c41",
+      "size_bytes": 19160,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "geotech_investigations.geojson",
+      "path": "data/gsi_raw/geotech_investigations.geojson",
+      "record_count": 7,
+      "sha256": "683c3bc67f187554d76688258b71f34094d4748a83a74f1cd9dc90b90cd88b3f",
+      "size_bytes": 18068,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "geothermal_closed_loop.geojson",
+      "path": "data/gsi_raw/geothermal_closed_loop.geojson",
+      "record_count": 919,
+      "sha256": "e827e05da5417679cdfdbb76c437a1d215859c23c6eb92ef720bd8aaadfc540f",
+      "size_bytes": 13016105,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "geothermal_heat_flow.geojson",
+      "path": "data/gsi_raw/geothermal_heat_flow.geojson",
+      "record_count": 1,
+      "sha256": "df0bf6ae2f4edb33e07fede47a2b5be43e96e56479980bdbecab9a0d33231e40",
+      "size_bytes": 625,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "geothermal_open_loop_commercial.geojson",
+      "path": "data/gsi_raw/geothermal_open_loop_commercial.geojson",
+      "record_count": 88,
+      "sha256": "c746562ce727f3b3758dd7be4643f9f405e827e216203a6e1aebff294512b982",
+      "size_bytes": 6522569,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "geothermal_open_loop_domestic.geojson",
+      "path": "data/gsi_raw/geothermal_open_loop_domestic.geojson",
+      "record_count": 52,
+      "sha256": "19de0ce1183378df5965083447ea8ec023e985f12167f41b0917c08191b9b702",
+      "size_bytes": 3088778,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "geothermal_temperature.geojson",
+      "path": "data/gsi_raw/geothermal_temperature.geojson",
+      "record_count": 17,
+      "sha256": "21370827be1bfe2f63d0654164eedeebfeda9617fe9c41efd5545b36e3e6d35d",
+      "size_bytes": 9817,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "geothermal_thermal_conductivity.geojson",
+      "path": "data/gsi_raw/geothermal_thermal_conductivity.geojson",
+      "record_count": 37,
+      "sha256": "7cdb62575a494638320bbb3d310277619f8fa51cde7c5211e7ca75889fe90860",
+      "size_bytes": 20148,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "gw_recharge.geojson",
+      "path": "data/gsi_raw/gw_recharge.geojson",
+      "record_count": 8525,
+      "sha256": "7fef8dc454aefdc8a2fcda417e7ca6ecff6d5b0db4e1e732c152b9777c4b5630",
+      "size_bytes": 16331456,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "gw_vulnerability.geojson",
+      "path": "data/gsi_raw/gw_vulnerability.geojson",
+      "record_count": 5360,
+      "sha256": "fa0a037e8cf1d9289e8c1c2fec07f9cbd0ee07e754bdea3de339b628f15e28b0",
+      "size_bytes": 20473458,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "gw_vulnerability_full.geojson",
+      "path": "data/gsi_raw/gw_vulnerability_full.geojson",
+      "record_count": 1993,
+      "sha256": "95b52b54c78b085388d069435b2d2904e116e0158caedcbf007935795a0112ed",
+      "size_bytes": 13233429,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "gw_wells.geojson",
+      "path": "data/gsi_raw/gw_wells.geojson",
+      "record_count": 45,
+      "sha256": "2c9afd7c8e81f59045e67b48e00fc7be925d61f215bdf0a26bd8d917122d54c0",
+      "size_bytes": 76187,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "hydrostratigraphic.geojson",
+      "path": "data/gsi_raw/hydrostratigraphic.geojson",
+      "record_count": 118,
+      "sha256": "86a6c33968a3ddaa99945b3213e1672d349f7076470ffcd7a7a548a59ba8b074",
+      "size_bytes": 2350270,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "karst_features.geojson",
+      "path": "data/gsi_raw/karst_features.geojson",
+      "record_count": 103,
+      "sha256": "a76e7717a20bea91a2301b4277e3b80a86977d248ebaf516454ee146c86376a5",
+      "size_bytes": 46535,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "landslide_locations.geojson",
+      "path": "data/gsi_raw/landslide_locations.geojson",
+      "record_count": 32,
+      "sha256": "9a6eac3ac02e3684f2c24a7647f139d7f62e20a470f3139c9b85aba391223f1d",
+      "size_bytes": 51990,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "landslide_susceptibility.geojson",
+      "path": "data/gsi_raw/landslide_susceptibility.geojson",
+      "record_count": 2000,
+      "sha256": "8288e4ebd1ca88fb656c19e3715de1f48a162249eea360d98f28ae2b6fbe4a97",
+      "size_bytes": 1086261,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "minerals.geojson",
+      "path": "data/gsi_raw/minerals.geojson",
+      "record_count": 92,
+      "sha256": "9ce49e49832cd2511a800a55bab9eaf6cc138bfc286d437511e84345701c84fd",
+      "size_bytes": 39128,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "quaternary_sediments.geojson",
+      "path": "data/gsi_raw/quaternary_sediments.geojson",
+      "record_count": 3260,
+      "sha256": "2aa8fdbc5ca62772c56b173808bf64068559c5603b82ab953cd160917d477dda",
+      "size_bytes": 14570237,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "quaternary_sediments_full.geojson",
+      "path": "data/gsi_raw/quaternary_sediments_full.geojson",
+      "record_count": 1980,
+      "sha256": "b2dd469d16590a4573639fdbd61c6b63bceae3d414cb0253f954dae5f9e8c706",
+      "size_bytes": 7458321,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "source_protection.geojson",
+      "path": "data/gsi_raw/source_protection.geojson",
+      "record_count": 2,
+      "sha256": "67fcb113a40b82a9f8ac182ebd253371372d1cb29fd022864f2511f75eef330a",
+      "size_bytes": 6683,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "subsoil_permeability.geojson",
+      "path": "data/gsi_raw/subsoil_permeability.geojson",
+      "record_count": 4415,
+      "sha256": "960402a9aee680955a2f4259d69a90e9f00f580503f306d8fda54614fb9073e6",
+      "size_bytes": 36605212,
+      "classification": "official_extract",
+      "confidence": "high"
+    },
+    {
+      "name": "subsoil_permeability_full.geojson",
+      "path": "data/gsi_raw/subsoil_permeability_full.geojson",
+      "record_count": 1987,
+      "sha256": "8e6e292f7341b4ddfc27149a8a92530bbdbb12a8e387904a3fc34d261658d5b1",
+      "size_bytes": 19237433,
+      "classification": "official_extract",
+      "confidence": "high"
+    }
+  ],
+  "viewer_outputs": [
+    {
+      "name": "_metadata.json",
+      "path": "output/json/_metadata.json",
+      "record_count": null,
+      "sha256": "b9ca997b7abf88d5ee5e406dd1819443ffeff206293c6526cd5ce5c94d596ff2",
+      "size_bytes": 8423,
+      "classification": "generated_or_processed",
+      "confidence": "medium",
+      "note": "Generated or processed viewer artifact.",
+      "source_inputs": []
+    },
+    {
+      "name": "aquifer_boundaries.geojson",
+      "path": "output/json/aquifer_boundaries.geojson",
+      "record_count": 13,
+      "sha256": "aaaaed8efc8e76248ffe8715f1a8af9d662f4c4b1559da7e18bd4a94c42392f1",
+      "size_bytes": 469488,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Processed GeoJSON from official GSI aquifer data.",
+      "source_inputs": []
+    },
+    {
+      "name": "aquifer_overlay.json",
+      "path": "output/json/aquifer_overlay.json",
+      "record_count": 3,
+      "sha256": "505cbcf52313edc252388efdafe608005cd11ccf300b1b23e3efd2b65fb59eba",
+      "size_bytes": 9758,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Processed overlay from official GSI aquifer data.",
+      "source_inputs": []
+    },
+    {
+      "name": "bedrock_boreholes_points.json",
+      "path": "output/json/bedrock_boreholes_points.json",
+      "record_count": 6,
+      "sha256": "0244f48c169225194e4fba1ca8684d177c019b4af21f14e77e6f7d5475b35288",
+      "size_bytes": 1330,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Processed points from official GSI verified bedrock boreholes.",
+      "source_inputs": []
+    },
+    {
+      "name": "bedrock_boreholes_unverified_points.json",
+      "path": "output/json/bedrock_boreholes_unverified_points.json",
+      "record_count": 16,
+      "sha256": "404583082bd857deb1f07149f395620d189c32dae17bb68e20e69e18a7ac426f",
+      "size_bytes": 6831,
+      "classification": "generated_or_processed",
+      "confidence": "medium",
+      "note": "Generated or processed viewer artifact.",
+      "source_inputs": []
+    },
+    {
+      "name": "bedrock_cross_sections.geojson",
+      "path": "output/json/bedrock_cross_sections.geojson",
+      "record_count": 1,
+      "sha256": "3cf5e78736a330d0892dc29a179aab96b3205df69d2b3a6949468b216ffebd6b",
+      "size_bytes": 1349,
+      "classification": "generated_or_processed",
+      "confidence": "medium",
+      "note": "Generated or processed viewer artifact.",
+      "source_inputs": []
+    },
+    {
+      "name": "bedrock_geology_points.json",
+      "path": "output/json/bedrock_geology_points.json",
+      "record_count": 165,
+      "sha256": "2adc10b29673c4be7ccda08f12b8d98ee4ba4883ae2a113f8fc09b149d475ad5",
+      "size_bytes": 20305,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Processed points from official GSI bedrock structural measurements.",
+      "source_inputs": []
+    },
+    {
+      "name": "borehole_array.json",
+      "path": "output/json/borehole_array.json",
+      "record_count": 48,
+      "sha256": "cc44ba0f5029483a3e32cf0bfe9acaf20f5401979f93e52d20cabae382987c2d",
+      "size_bytes": 17130,
+      "classification": "design_scenario",
+      "confidence": "medium",
+      "note": "Synthetic GSHP design boreholes, not observed borehole records.",
+      "source_inputs": [
+        "formation_contacts.csv",
+        "structural_data.csv",
+        "faults.csv",
+        "boreholes_unified.csv",
+        "karst_features.csv"
+      ]
+    },
+    {
+      "name": "drilling_risk_register.json",
+      "path": "output/json/drilling_risk_register.json",
+      "record_count": null,
+      "sha256": "ce7b98cc6a6b19610cf8d9b59b606f0c7a57f29c1c0d0e64313ccbf21c6b5334",
+      "size_bytes": 3911,
+      "classification": "project_assessment",
+      "confidence": "medium",
+      "note": "Questionnaire-seeded risk register for closed-loop ground source drilling planning.",
+      "source_inputs": []
+    },
+    {
+      "name": "epa_groundwater_status.geojson",
+      "path": "output/json/epa_groundwater_status.geojson",
+      "record_count": 31,
+      "sha256": "94e0ffc6765fb4a45ecdf500e5db948d851f2f0c53d2f4f2c1b9a4eb92dfcddc",
+      "size_bytes": 3980868,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "EPA WFD groundwater body status extract for the Sligo assessment bbox.",
+      "source_inputs": []
+    },
+    {
+      "name": "epa_groundwater_status_overlay.json",
+      "path": "output/json/epa_groundwater_status_overlay.json",
+      "record_count": 25,
+      "sha256": "692da6dffd4bc386536223b6dca648f7cb1b3b785dca7d73753ffaf2eff0a611",
+      "size_bytes": 1576469,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Processed overlay from EPA WFD groundwater body status.",
+      "source_inputs": []
+    },
+    {
+      "name": "faults.json",
+      "path": "output/json/faults.json",
+      "record_count": 79,
+      "sha256": "2d3a7fa952522c41b6d0aabc1e522ce25849dc2d98afc6e4abe0c37a019c84c0",
+      "size_bytes": 218494,
+      "classification": "interpreted_model",
+      "confidence": "medium",
+      "note": "Fault surfaces extruded from GSI 2D geological linework.",
+      "source_inputs": [
+        "formation_contacts.csv",
+        "structural_data.csv",
+        "faults.csv",
+        "boreholes_unified.csv",
+        "karst_features.csv"
+      ]
+    },
+    {
+      "name": "formation_surfaces.json",
+      "path": "output/json/formation_surfaces.json",
+      "record_count": 7,
+      "sha256": "33dd56ed309ffc754e651c4157f559b5d4352dc57e9dec10e77e221303b6bc25",
+      "size_bytes": 9402371,
+      "classification": "interpreted_model",
+      "confidence": "medium",
+      "note": "Interpolated 3D formation surfaces, not observed 3D geology.",
+      "source_inputs": [
+        "formation_contacts.csv",
+        "structural_data.csv",
+        "faults.csv",
+        "boreholes_unified.csv",
+        "karst_features.csv"
+      ]
+    },
+    {
+      "name": "geoheritage_overlay.json",
+      "path": "output/json/geoheritage_overlay.json",
+      "record_count": 14,
+      "sha256": "4714fdc9fcc9a4fa9144fa348d14b794634ba7b0b084c22d0585e530a9ec53bf",
+      "size_bytes": 13127,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Processed overlay from official GSI geoheritage data.",
+      "source_inputs": []
+    },
+    {
+      "name": "geotech_boreholes_points.json",
+      "path": "output/json/geotech_boreholes_points.json",
+      "record_count": 81,
+      "sha256": "9819a0934b686d741c254a7a2e66a7cef6f3d6739834b5647eb4a2e4730675b5",
+      "size_bytes": 9031,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Processed points from official GSI geotechnical boreholes.",
+      "source_inputs": []
+    },
+    {
+      "name": "geothermal_closed_loop_overlay.json",
+      "path": "output/json/geothermal_closed_loop_overlay.json",
+      "record_count": 477,
+      "sha256": "f22ccf3b0fb41398af5ddbc4cb53fd866f144c3ddbc7f444934f776e7b5f72a1",
+      "size_bytes": 4279720,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Processed overlay from official GSI closed-loop geothermal suitability data.",
+      "source_inputs": []
+    },
+    {
+      "name": "geothermal_heat_flow_points.json",
+      "path": "output/json/geothermal_heat_flow_points.json",
+      "record_count": 1,
+      "sha256": "7681a245e94e41df1c647c3373cda82a7f1345378be77bf0fbf4c6d849b56226",
+      "size_bytes": 189,
+      "classification": "processed_official",
+      "confidence": "medium",
+      "note": "Processed point from official GSI/DIAS heat-flow data; sparse in the study area.",
+      "source_inputs": []
+    },
+    {
+      "name": "geothermal_open_loop_commercial_overlay.json",
+      "path": "output/json/geothermal_open_loop_commercial_overlay.json",
+      "record_count": 64,
+      "sha256": "d95390b62fea9a16393faf0c60d94b2e301a511b01d0b23465869ab7240377f6",
+      "size_bytes": 3287208,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Processed overlay from official GSI commercial open-loop geothermal suitability data.",
+      "source_inputs": []
+    },
+    {
+      "name": "geothermal_open_loop_domestic_overlay.json",
+      "path": "output/json/geothermal_open_loop_domestic_overlay.json",
+      "record_count": 38,
+      "sha256": "269f668270c5981dabcbb1b9ec7762de584ebf70911dec14b3fa80a0459d3d24",
+      "size_bytes": 1505908,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Processed overlay from official GSI domestic open-loop geothermal suitability data.",
+      "source_inputs": []
+    },
+    {
+      "name": "geothermal_temperature_points.json",
+      "path": "output/json/geothermal_temperature_points.json",
+      "record_count": 8,
+      "sha256": "9a0003e47f7e8a570e3b06d0272e39023b06e1ed7ec4daff30ca883e972716b3",
+      "size_bytes": 1500,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Processed points from official GSI geothermal temperature measurements.",
+      "source_inputs": []
+    },
+    {
+      "name": "geothermal_thermal_conductivity_points.json",
+      "path": "output/json/geothermal_thermal_conductivity_points.json",
+      "record_count": 10,
+      "sha256": "b094790111aa1f550b011c4a2e36ce205f2e6e8704ee77e987e228b26da36c13",
+      "size_bytes": 1115,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Processed points from official GSI thermal conductivity measurements.",
+      "source_inputs": []
+    },
+    {
+      "name": "groundwater_recharge.geojson",
+      "path": "output/json/groundwater_recharge.geojson",
+      "record_count": 1997,
+      "sha256": "7b6a2b1188f1e6fed353e7b696f21a3dc5726624b88e6b48e8b90ea0132b7246",
+      "size_bytes": 3860627,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Processed GeoJSON from official GSI groundwater recharge data.",
+      "source_inputs": []
+    },
+    {
+      "name": "gsi_site_data.json",
+      "path": "output/json/gsi_site_data.json",
+      "record_count": null,
+      "sha256": "78bdece7a5d60e187a23ee78b85b8475d0c323429f63d8164d5b27de9969e017",
+      "size_bytes": 10948,
+      "classification": "processed_official",
+      "confidence": "medium",
+      "note": "Site summary compiled from GSI-source-informed datasets.",
+      "source_inputs": []
+    },
+    {
+      "name": "historical_investigations.json",
+      "path": "output/json/historical_investigations.json",
+      "record_count": 7,
+      "sha256": "759f6842937119800bd9994efe39640f998d59b3fb7b1a78c8c687fb5b417bcf",
+      "size_bytes": 3902,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Centroids derived from official GSI geotechnical investigation polygons.",
+      "source_inputs": []
+    },
+    {
+      "name": "hydrostratigraphic_overlay.json",
+      "path": "output/json/hydrostratigraphic_overlay.json",
+      "record_count": 86,
+      "sha256": "16b1948caae7cf35a85e78eb4c29512eb1fd6ad1257f558571b1dc8cf9b8ff14",
+      "size_bytes": 848366,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Processed overlay from official GSI hydrostratigraphic units data.",
+      "source_inputs": []
+    },
+    {
+      "name": "karst_connections.geojson",
+      "path": "output/json/karst_connections.geojson",
+      "record_count": 2,
+      "sha256": "55726f1a62cfe0f2f4ff6615d94c5a4713b72d2f9d23ee0db64ffca8c2af01f3",
+      "size_bytes": 1441,
+      "classification": "processed_official",
+      "confidence": "medium",
+      "note": "Processed/derived karst connection features.",
+      "source_inputs": []
+    },
+    {
+      "name": "karst_features_points.json",
+      "path": "output/json/karst_features_points.json",
+      "record_count": 103,
+      "sha256": "a849050cec8415e639937b636cd7bfb2e3a4f9d2149d88a11aa8837a3b60fed6",
+      "size_bytes": 24179,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Processed points from official GSI karst features.",
+      "source_inputs": []
+    },
+    {
+      "name": "landslide_locations_points.json",
+      "path": "output/json/landslide_locations_points.json",
+      "record_count": 32,
+      "sha256": "128c9ad762183e5940342463837c82bba562a57a4cd415b1303a4185394d37bd",
+      "size_bytes": 5922,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Processed points from official GSI landslide locations.",
+      "source_inputs": []
+    },
+    {
+      "name": "landslide_susceptibility_overlay.json",
+      "path": "output/json/landslide_susceptibility_overlay.json",
+      "record_count": 901,
+      "sha256": "87ef393c6fccfcd775087eb2e6aca3622015c0e6bf3952cfcd13e50803b40b14",
+      "size_bytes": 233031,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Processed overlay from official GSI landslide susceptibility data.",
+      "source_inputs": []
+    },
+    {
+      "name": "minerals_points.json",
+      "path": "output/json/minerals_points.json",
+      "record_count": 92,
+      "sha256": "ef43e7bb75aac11254f5711ae795dc17a0adb4333f2fb87664f95523c2f163be",
+      "size_bytes": 18537,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Processed points from official GSI mineral locations.",
+      "source_inputs": []
+    },
+    {
+      "name": "model_metadata.json",
+      "path": "output/json/model_metadata.json",
+      "record_count": null,
+      "sha256": "fdbbf39504ddeda3564b87ca36c2cef974340e5df9c58fbd84a9c09df483aeb9",
+      "size_bytes": 1709,
+      "classification": "generated_metadata",
+      "confidence": "medium",
+      "note": "Generated metadata from model builder/export pipeline.",
+      "source_inputs": [
+        "formation_contacts.csv",
+        "structural_data.csv",
+        "faults.csv",
+        "boreholes_unified.csv",
+        "karst_features.csv"
+      ]
+    },
+    {
+      "name": "opw_flood_layers.json",
+      "path": "output/json/opw_flood_layers.json",
+      "record_count": null,
+      "sha256": "513c97ca929cac24439aad96681bcd6979a28e2e95f355ac4dbffffc7eca5d44",
+      "size_bytes": 12189,
+      "classification": "source_catalog",
+      "confidence": "medium",
+      "note": "OPW FloodInfo.ie WMS layer registry for flood-risk follow-up ingestion.",
+      "source_inputs": []
+    },
+    {
+      "name": "project_config.json",
+      "path": "output/json/project_config.json",
+      "record_count": null,
+      "sha256": "1dc63371e8d3624e57c60a38d060355e679cdf1e8924a85aa80a7f9b4df7aa0b",
+      "size_bytes": 1705,
+      "classification": "project_config",
+      "confidence": "high",
+      "note": "Site/project configuration used by the viewer.",
+      "source_inputs": []
+    },
+    {
+      "name": "quaternary_sediments_overlay.json",
+      "path": "output/json/quaternary_sediments_overlay.json",
+      "record_count": 1518,
+      "sha256": "4603ca1f84a37547991c55415501fd069ef29a643e8aa55d61e9e32e840df740",
+      "size_bytes": 2628124,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Processed overlay from official GSI quaternary sediments data.",
+      "source_inputs": []
+    },
+    {
+      "name": "site_assessment_profile.json",
+      "path": "output/json/site_assessment_profile.json",
+      "record_count": null,
+      "sha256": "124787fda3d8f5c178ff5a3f3f27c94c7e87764e48f97376ba903cb28c0df983",
+      "size_bytes": 1504,
+      "classification": "project_assessment",
+      "confidence": "medium",
+      "note": "Questionnaire-seeded project profile for the drilling prognosis workflow.",
+      "source_inputs": []
+    },
+    {
+      "name": "source_inventory.json",
+      "path": "output/json/source_inventory.json",
+      "record_count": null,
+      "sha256": "53d6d2df888377bedc377e33eb81c29efd740f38fc4d1f6aa2175315f1b42990",
+      "size_bytes": 35038,
+      "classification": "source_catalog",
+      "confidence": "high",
+      "note": "Ontology/source catalogue used by the viewer.",
+      "source_inputs": []
+    },
+    {
+      "name": "source_protection_overlay.json",
+      "path": "output/json/source_protection_overlay.json",
+      "record_count": 1,
+      "sha256": "de8becc690c4946e8ad24abac8e5f5cc75250a95eaaab555051f4495e3f80736",
+      "size_bytes": 3430,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Processed overlay from official GSI source protection zones.",
+      "source_inputs": []
+    },
+    {
+      "name": "source_protection_zones.geojson",
+      "path": "output/json/source_protection_zones.geojson",
+      "record_count": 2,
+      "sha256": "0314dad9cedde42fb1d02377008af95526f4eb312ce1d9650fa6bbdf0d343911",
+      "size_bytes": 14385,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Official GSI source protection zone extract for the wider Sligo area.",
+      "source_inputs": []
+    },
+    {
+      "name": "subsoil_overlay.json",
+      "path": "output/json/subsoil_overlay.json",
+      "record_count": 379,
+      "sha256": "276711eb21a0db56067f13459a9e3c5aa7ace00c91d828f4b60285b662311ffd",
+      "size_bytes": 294040,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Processed overlay from official GSI subsoil permeability data.",
+      "source_inputs": []
+    },
+    {
+      "name": "subsoil_permeability.geojson",
+      "path": "output/json/subsoil_permeability.geojson",
+      "record_count": 382,
+      "sha256": "568d047c6402cc19aea1073029e8c4dbcad4a41e1e5afeae74287da8d3663ac1",
+      "size_bytes": 3387520,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Processed GeoJSON from official GSI subsoil data.",
+      "source_inputs": []
+    },
+    {
+      "name": "temperature_at_depth.json",
+      "path": "output/json/temperature_at_depth.json",
+      "record_count": null,
+      "sha256": "1d38cd7c96409f192516fe93e9d563e3375b6395f67fa617e2d0c0412762bd97",
+      "size_bytes": 170639,
+      "classification": "derived_model",
+      "confidence": "medium",
+      "note": "Thermal model output derived from geological and thermal assumptions.",
+      "source_inputs": [
+        "formation_contacts.csv",
+        "structural_data.csv",
+        "faults.csv",
+        "boreholes_unified.csv",
+        "karst_features.csv"
+      ]
+    },
+    {
+      "name": "voxel_model.json",
+      "path": "output/json/voxel_model.json",
+      "record_count": null,
+      "sha256": "5f7fb9cd344a815ceb80c21dc1ea1b6e9262dc75176e3c902ded76ce51673f70",
+      "size_bytes": 570360,
+      "classification": "interpreted_model",
+      "confidence": "medium",
+      "note": "Downsampled volumetric grid derived from interpreted formation surfaces.",
+      "source_inputs": [
+        "formation_contacts.csv",
+        "structural_data.csv",
+        "faults.csv",
+        "boreholes_unified.csv",
+        "karst_features.csv"
+      ]
+    },
+    {
+      "name": "vulnerability_overlay.json",
+      "path": "output/json/vulnerability_overlay.json",
+      "record_count": 350,
+      "sha256": "462c64196f413992e9cfc64b44a53bada143e5bb21cfd4c89716474d44e264be",
+      "size_bytes": 228797,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Processed overlay from official GSI groundwater vulnerability data.",
+      "source_inputs": []
+    },
+    {
+      "name": "vulnerability_zones.geojson",
+      "path": "output/json/vulnerability_zones.geojson",
+      "record_count": 355,
+      "sha256": "0eb6b95c9824000d5d64aa51337dce681310b4d9d0e04cf4a16b4f753e67de1d",
+      "size_bytes": 4733679,
+      "classification": "processed_official",
+      "confidence": "medium_high",
+      "note": "Processed GeoJSON from official GSI vulnerability data.",
+      "source_inputs": []
+    }
+  ],
+  "known_gaps": [
+    "The 3D geology is an interpreted model, not an authoritative observed 3D GSI model.",
+    "Local DEM raster is absent when only .hdr/.tfw sidecar files are present."
+  ]
+}
