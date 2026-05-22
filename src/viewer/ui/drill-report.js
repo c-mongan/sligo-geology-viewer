@@ -354,7 +354,7 @@ export function exportDrillReport() {
         '<dl class="dsrc">' +
         '<dt>Geology:</dt><dd>Geological Survey Ireland (GSI) &mdash; Bedrock Geology, Aquifers, Karst Database</dd><br>' +
         '<dt>Thermal:</dt><dd>VDI 4640 guidelines for ground source heat pump design</dd><br>' +
-        '<dt>Model:</dt><dd>GEMINI Project &mdash; SRSC Sligo</dd><br>' +
+        '<dt>Model:</dt><dd>Sligo Basin 3D Geology Viewer</dd><br>' +
         '<dt>Licence:</dt><dd>CC-BY 4.0 (GSI data)</dd></dl>' +
         '<div class="disc"><strong>Disclaimer:</strong> This assessment is based on publicly available geological data and ' +
         'simplified thermal models. It does not replace a professional site investigation, detailed geological ' +

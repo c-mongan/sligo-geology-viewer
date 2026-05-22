@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "project_id": "srsc-sligo",
-  "title": "SRSC Sligo 3D Geological Model",
-  "subtitle": "GEMINI Project \u2022 7 formations \u2022 48 boreholes \u2022 18 GSI data layers",
+  "title": "Sligo Basin 3D Geology Viewer",
+  "subtitle": "Open geoscience demo \u2022 7 formations \u2022 48 design boreholes \u2022 GSI-derived layers",
   "site": {
     "name": "Sligo Regional Sports Centre",
     "short_name": "SRSC",

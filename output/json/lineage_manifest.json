@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "generated_at": "2026-05-19T10:21:00+00:00",
-  "project": "SRSC Sligo 3D Geological Model",
+  "project": "Sligo Basin 3D Geology Viewer",
   "project_config": "output/json/project_config.json",
   "project_config_source": "config/project.srsc.json",
   "model_extent_crs": "EPSG:2157",

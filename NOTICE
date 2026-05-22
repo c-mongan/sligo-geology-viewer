@@ -7,11 +7,14 @@ Data attribution:
 - Geological, groundwater, geothermal, karst, borehole, and related spatial
   context may derive from public Irish geoscience and environmental sources,
   including Geological Survey Ireland and other public agencies.
+- Contains Irish Public Sector Data (Geological Survey Ireland) licensed under
+  a Creative Commons Attribution 4.0 International (CC BY 4.0) licence.
 - Basemap/satellite imagery is loaded from third-party public tile services at
   runtime where available and is not redistributed in this repository.
 
-The model is an interpretation for screening and demonstration purposes. It is
-not a certified engineering, drilling, hydrogeological, or planning assessment.
+The 3D model surfaces, borehole array, prognosis, and risk labels are derived
+interpretations for screening and demonstration purposes. They are not certified
+engineering, drilling, hydrogeological, or planning assessments.
 
 If you publish derived work, review and retain the attribution and license terms
 for any upstream datasets you add or redistribute.
