@@ -1,8 +1,28 @@
-# Sligo Geology Viewer
+# Sligo Basin 3D Geology Viewer
 
-A minimal static Three.js viewer for an interpreted Sligo Basin geological model.
+An open geoscience portfolio project: a static Three.js viewer for an interpreted 3D geological model of the Sligo Basin, Ireland.
 
-The app renders geological formation surfaces, faults, borehole context, selected groundwater/geothermal overlays, and decision-support panels from local JSON payloads. It does not require a backend service.
+It turns public geoscience datasets into an interactive subsurface scene with formation surfaces, faults, borehole context, geothermal screening layers, groundwater/karst evidence, provenance labels, and drilling-risk workflows. No backend service is required.
+
+![Sligo Basin 3D geology overview](docs/assets/overview.png)
+
+## Highlights
+
+- **Static-first deployment:** Vite builds the viewer into `output/viewer`, with JSON payloads served directly from `output/json`.
+- **3D geoscience scene:** Seven interpreted Carboniferous formation surfaces, fault sheets, terrain, satellite imagery, and borehole/design context.
+- **Risk-oriented workflows:** Drilling-risk mode, site assessment, prognosis, measurement, section views, and provenance panels.
+- **Data transparency:** Public-source labels, confidence tags, and derived/observed/design distinctions are visible in the UI.
+- **Open-source friendly:** The repo excludes private planning notes, local env files, raw bulk datasets, backend experiments, and third-party documents.
+
+## Screenshots
+
+| Overview | Cross Section |
+| --- | --- |
+| ![Overview](docs/assets/overview.png) | ![Cross section](docs/assets/cross-section.png) |
+
+| Drilling Risk | Data Provenance |
+| --- | --- |
+| ![Drilling risk](docs/assets/drilling-risk.png) | ![Data provenance](docs/assets/data-provenance.png) |
 
 ## Quick Start
 
@@ -22,20 +42,43 @@ npm run dev
 
 Open `http://localhost:9090/viewer/`.
 
-## Repository Scope
-
-This public repo intentionally contains only the static viewer and the minimal demo payloads needed to run it. It excludes private planning notes, local environment files, raw source datasets, generated research output, backend experiments, and third-party documents.
-
-## Data And Caveats
-
-The included data is a screening-level interpreted model, not certified engineering design information. Field investigation and authoritative source datasets should override any conclusion from this viewer.
-
-Before redistributing or extending the data, review source licensing and attribution requirements in `NOTICE`.
-
 ## Commands
 
 ```bash
 npm run build      # build static viewer into output/viewer
 npm run serve      # serve output/ locally on port 9090
-npm run test:e2e   # run Playwright viewer smoke tests
+npm run test:e2e   # run the Playwright smoke test
 ```
+
+## Data And Attribution
+
+The included demo payloads are screening-level interpreted model outputs derived from public geoscience context and project assumptions. Geological, groundwater, geothermal, karst, borehole, and related spatial context may derive from public Irish geoscience sources, including Geological Survey Ireland.
+
+Contains Irish Public Sector Data (Geological Survey Ireland) licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) licence.
+
+The 3D model surfaces, borehole array, prognosis, and risk labels are derived interpretations. They are not certified engineering, drilling, hydrogeological, or planning assessments. Field investigation and authoritative source datasets should override conclusions from this viewer.
+
+See `NOTICE` for attribution notes.
+
+## Repository Scope
+
+This public repo intentionally contains only the static viewer and minimal demo payloads needed to run it. It excludes:
+
+- local secrets and `.env` files
+- private planning/agent memory
+- raw bulk datasets
+- generated research output
+- backend/API experiments
+- third-party PDF/DOCX/PPTX source documents
+
+## Tech Stack
+
+- Three.js
+- Vite
+- Playwright
+- Proj4
+- Static JSON/GeoJSON payloads
+
+## License
+
+Code is released under the MIT License. Dataset-derived payloads retain their upstream attribution and licensing requirements; see `NOTICE`.
