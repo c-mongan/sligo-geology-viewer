@@ -16,13 +16,17 @@ It turns public geoscience datasets into an interactive subsurface scene with fo
 
 ## Screenshots
 
-| Overview | Cross Section |
+| Overview | Proposed Site |
 | --- | --- |
-| ![Overview](docs/assets/overview.png) | ![Cross section](docs/assets/cross-section.png) |
+| ![Overview](docs/assets/overview.png) | ![Proposed site](docs/assets/proposed-site.png) |
 
-| Drilling Risk | Data Provenance |
+| Cross Section | Drilling Risk |
 | --- | --- |
-| ![Drilling risk](docs/assets/drilling-risk.png) | ![Data provenance](docs/assets/data-provenance.png) |
+| ![Cross section](docs/assets/cross-section.png) | ![Drilling risk](docs/assets/drilling-risk.png) |
+
+| Data Provenance |
+| --- |
+| ![Data provenance](docs/assets/data-provenance.png) |
 
 ## Quick Start
 
