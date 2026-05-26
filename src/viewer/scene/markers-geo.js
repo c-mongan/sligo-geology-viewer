@@ -20,6 +20,11 @@ function isInsideModelExtent(itmX, itmY) {
         && itmY >= extent.y_min && itmY <= extent.y_max;
 }
 
+function isInsideModelPoint(modelX, modelZ) {
+    const { itmX, itmY } = modelToItm(modelX, modelZ);
+    return isInsideModelExtent(itmX, itmY);
+}
+
 function coLocationOffsets(records, radius = 20) {
     const grouped = new Map();
     for (let i = 0; i < records.length; i++) {
@@ -74,6 +79,29 @@ function surfaceZAtModel(modelX, modelZ, fallback = 55) {
     return top * (1 - ty) + bottom * ty;
 }
 
+function addSurfaceHalo(group, baseX, baseZ, rawTopZ, color, innerRadius, outerRadius, userData = {}, opacity = 0.24) {
+    const haloGeom = new THREE.RingGeometry(innerRadius, outerRadius, 28);
+    const haloMat = new THREE.MeshBasicMaterial({
+        color,
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity,
+        depthWrite: false,
+    });
+    const halo = new THREE.Mesh(haloGeom, haloMat);
+    halo.rotation.x = -Math.PI / 2;
+    halo.renderOrder = 84;
+    halo.userData = {
+        ...userData,
+        rawTopZ,
+        baseX,
+        baseZ,
+        isSurfaceHalo: true,
+    };
+    group.add(halo);
+    return halo;
+}
+
 // ── Geotechnical investigation sites ──────────────────
 export function buildGeotechSites() {
     if (!state.gsiData || !state.gsiData.geotechnical_boreholes) return;
@@ -97,6 +125,7 @@ export function buildGeotechSites() {
             ...coordMetaFromItm(gt.itm_x, gt.itm_y, 'processed GSI geotechnical coordinate'),
         };
         state.geotechGroup.add(marker);
+        addSurfaceHalo(state.geotechGroup, x, z, surfZ + 1.5, 0xd2a8ff, 18, 50, marker.userData, 0.18);
     }
 }
 
@@ -218,9 +247,10 @@ export function buildStructuralMeasurements() {
 // ── Thermal conductivity point markers ───────────────
 export function buildThermalCondMarkers() {
     if (!state.thermalCondData || !state.thermalCondData.length) return;
-    const visualOffsets = coLocationOffsets(state.thermalCondData, 24);
-    for (let i = 0; i < state.thermalCondData.length; i++) {
-        const pt = state.thermalCondData[i];
+    const visibleRecords = state.thermalCondData.filter(pt => isInsideModelExtent(pt.x, pt.y));
+    const visualOffsets = coLocationOffsets(visibleRecords, 24);
+    for (let i = 0; i < visibleRecords.length; i++) {
+        const pt = visibleRecords[i];
         const conductivity = pt.TCONAVWMK || 0;
         // Color: blue (low, <2) -> yellow (mid, 2-3) -> red (high, >3)
         const t = Math.max(0, Math.min(1, (conductivity - 1) / 3));
@@ -230,8 +260,13 @@ export function buildThermalCondMarkers() {
         const color = (r << 16) | (g << 8) | b;
 
         const size = 12 + conductivity * 3;
-        const geom = new THREE.SphereGeometry(size, 12, 8);
-        const mat = new THREE.MeshBasicMaterial({ color: color });
+        const geom = new THREE.SphereGeometry(size, 16, 10);
+        const mat = new THREE.MeshStandardMaterial({
+            color,
+            emissive: color,
+            emissiveIntensity: 0.18,
+            roughness: 0.35,
+        });
         const mesh = new THREE.Mesh(geom, mat);
 
         const { x: modelX, z: modelZ } = itmToModel(pt.x, pt.y);
@@ -253,6 +288,7 @@ export function buildThermalCondMarkers() {
             ...coordMetaFromItm(pt.x, pt.y, 'processed GSI thermal conductivity coordinate'),
         };
         state.thermalCondGroup.add(mesh);
+        addSurfaceHalo(state.thermalCondGroup, visualX, visualZ, surfZ + 2, color, size + 4, size + 16, mesh.userData, 0.2);
     }
 }
 
@@ -260,6 +296,7 @@ export function buildThermalCondMarkers() {
 export function buildTempDepthMarkers() {
     if (!state.tempDepthData || !state.tempDepthData.length) return;
     for (const pt of state.tempDepthData) {
+        if (!isInsideModelExtent(pt.x, pt.y)) continue;
         const temp = pt.TEMP_RCK_C || 0;
         const depth = pt.DEPTH_M || 100;
         const gradient = pt.TMPGRADCAL || pt.TMPGRADREC || 0;
@@ -273,8 +310,8 @@ export function buildTempDepthMarkers() {
 
         // Vertical cylinder representing the measurement depth
         const height = Math.min(depth, 500) * 0.12;
-        const geom = new THREE.CylinderGeometry(10, 10, height, 8);
-        const mat = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.8 });
+        const geom = new THREE.CylinderGeometry(11, 11, height, 10);
+        const mat = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.84 });
         const mesh = new THREE.Mesh(geom, mat);
 
         const { x: modelX, z: modelZ } = itmToModel(pt.x, pt.y);
@@ -292,6 +329,7 @@ export function buildTempDepthMarkers() {
             ...coordMetaFromItm(pt.x, pt.y, 'processed GSI temperature coordinate'),
         };
         state.tempDepthGroup.add(mesh);
+        addSurfaceHalo(state.tempDepthGroup, modelX, modelZ, surfZ + 1.2, color, 13, 28, mesh.userData, 0.22);
     }
 }
 
@@ -299,10 +337,11 @@ export function buildTempDepthMarkers() {
 export function buildHeatFlowMarkers() {
     if (!state.heatFlowData || !state.heatFlowData.length) return;
     for (const pt of state.heatFlowData) {
+        if (!isInsideModelExtent(pt.x, pt.y)) continue;
         const { x: mx, z: mz } = itmToModel(pt.x, pt.y);
         const surfZ = surfaceZAtModel(mx, mz, 70);
-        const diamondGeom = new THREE.OctahedronGeometry(22, 0);
-        const mat = new THREE.MeshBasicMaterial({ color: 0xff00ff, transparent: true, opacity: 0.85 });
+        const diamondGeom = new THREE.OctahedronGeometry(25, 0);
+        const mat = new THREE.MeshBasicMaterial({ color: 0xff66ff, transparent: true, opacity: 0.9 });
         const marker = new THREE.Mesh(diamondGeom, mat);
         marker.position.set(mx, (surfZ + 14) * state.currentVertExag, mz);
         marker.userData = {
@@ -316,6 +355,7 @@ export function buildHeatFlowMarkers() {
             ...coordMetaFromItm(pt.x, pt.y, 'processed GSI/DIAS heat-flow coordinate'),
         };
         state.heatFlowGroup.add(marker);
+        addSurfaceHalo(state.heatFlowGroup, mx, mz, surfZ + 2, 0xff66ff, 20, 34, marker.userData, 0.2);
     }
 }
 
@@ -352,6 +392,7 @@ export function buildKarstConnections() {
 export function buildBedrockGeolMarkers() {
     if (!state.bedrockGeolData || !state.bedrockGeolData.length) return;
     for (const pt of state.bedrockGeolData) {
+        if (!isInsideModelExtent(pt.x, pt.y)) continue;
         const strike = pt.STRIKE || 0;
         const dip = pt.DIP || 0;
         const { x: modelX, z: modelZ } = itmToModel(pt.x, pt.y);
@@ -385,6 +426,7 @@ export function buildBedrockGeolMarkers() {
         line.userData = disc.userData;
         state.bedrockGeolGroup.add(disc);
         state.bedrockGeolGroup.add(line);
+        addSurfaceHalo(state.bedrockGeolGroup, modelX, modelZ, surfZ + 0.8, 0xffa657, 32, 52, disc.userData, 0.16);
     }
 }
 
@@ -392,12 +434,13 @@ export function buildBedrockGeolMarkers() {
 export function buildBedrockBhMarkers() {
     if (!state.bedrockBhData || !state.bedrockBhData.length) return;
     for (const pt of state.bedrockBhData) {
+        if (!isInsideModelExtent(pt.x, pt.y)) continue;
         const { x: modelX, z: modelZ } = itmToModel(pt.x, pt.y);
         const depth = pt.LENGTH_M || 50;
         const height = Math.min(depth, 300) * 0.5;
         const surfZ = surfaceZAtModel(modelX, modelZ, 70);
-        const geom = new THREE.CylinderGeometry(14, 14, height, 8);
-        const mat = new THREE.MeshBasicMaterial({ color: 0x7ee787, transparent: true, opacity: 0.8 });
+        const geom = new THREE.CylinderGeometry(14, 14, height, 10);
+        const mat = new THREE.MeshBasicMaterial({ color: 0x7ee787, transparent: true, opacity: 0.84 });
         const mesh = new THREE.Mesh(geom, mat);
         mesh.position.set(modelX, (surfZ - height / 2) * state.currentVertExag, modelZ);
         mesh.userData = {
@@ -407,19 +450,21 @@ export function buildBedrockBhMarkers() {
             county: pt.COUNTY,
             comments: pt.COMMENTS,
             logUrl: pt.LOG_URL,
-            rawTopZ: surfZ, baseX: modelX, baseZ: modelZ,
+            rawTopZ: surfZ, rawHeight: height, baseX: modelX, baseZ: modelZ,
             ...coordMetaFromItm(pt.x, pt.y, 'processed GSI verified borehole coordinate'),
         };
         state.bedrockBhGroup.add(mesh);
+        addSurfaceHalo(state.bedrockBhGroup, modelX, modelZ, surfZ + 1.5, 0x7ee787, 15, 30, mesh.userData, 0.24);
     }
 }
 
 // ── Unverified bedrock borehole markers ─────────────
 export function buildBedrockBhUnverifiedMarkers() {
     if (!state.bedrockBhUnverifiedData || !state.bedrockBhUnverifiedData.length) return;
-    const visualOffsets = coLocationOffsets(state.bedrockBhUnverifiedData, 18);
-    for (let i = 0; i < state.bedrockBhUnverifiedData.length; i++) {
-        const pt = state.bedrockBhUnverifiedData[i];
+    const visibleRecords = state.bedrockBhUnverifiedData.filter(pt => isInsideModelExtent(pt.x, pt.y));
+    const visualOffsets = coLocationOffsets(visibleRecords, 18);
+    for (let i = 0; i < visibleRecords.length; i++) {
+        const pt = visibleRecords[i];
         const { x: modelX, z: modelZ } = itmToModel(pt.x, pt.y);
         const offset = visualOffsets.get(i) || { x: 0, z: 0, count: 1 };
         const visualX = modelX + offset.x;
@@ -427,8 +472,8 @@ export function buildBedrockBhUnverifiedMarkers() {
         const depth = Number(pt.LENGTH_M) || 30;
         const height = Math.max(10, Math.min(depth, 250) * 0.35);
         const surfZ = surfaceZAtModel(visualX, visualZ, 70);
-        const geom = new THREE.CylinderGeometry(10, 10, height, 8);
-        const mat = new THREE.MeshBasicMaterial({ color: 0xd29922, transparent: true, opacity: 0.72 });
+        const geom = new THREE.CylinderGeometry(10, 10, height, 10);
+        const mat = new THREE.MeshBasicMaterial({ color: 0xd29922, transparent: true, opacity: 0.78 });
         const mesh = new THREE.Mesh(geom, mat);
         mesh.position.set(visualX, (surfZ - height / 2) * state.currentVertExag, visualZ);
         mesh.userData = {
@@ -449,6 +494,7 @@ export function buildBedrockBhUnverifiedMarkers() {
             ...coordMetaFromItm(pt.x, pt.y, 'GSI unverified bedrock borehole coordinate', 'unverified source record'),
         };
         state.bedrockBhUnverifiedGroup.add(mesh);
+        addSurfaceHalo(state.bedrockBhUnverifiedGroup, visualX, visualZ, surfZ + 1.5, 0xd29922, 11, 24, mesh.userData, 0.2);
 
         if (Number.isFinite(Number(pt.ROCKHEAD_M))) {
             const ringGeom = new THREE.RingGeometry(12, 20, 16);
@@ -513,10 +559,11 @@ export function buildBedrockCrossSections() {
 export function buildLandslideLocMarkers() {
     if (!state.landslideLocsData || !state.landslideLocsData.length) return;
     for (const pt of state.landslideLocsData) {
+        if (!isInsideModelExtent(pt.x, pt.y)) continue;
         const { x: modelX, z: modelZ } = itmToModel(pt.x, pt.y);
         const surfZ = surfaceZAtModel(modelX, modelZ, 75);
-        const geom = new THREE.ConeGeometry(24, 34, 3);
-        const mat = new THREE.MeshBasicMaterial({ color: 0xf85149 });
+        const geom = new THREE.ConeGeometry(26, 38, 3);
+        const mat = new THREE.MeshBasicMaterial({ color: 0xf85149, transparent: true, opacity: 0.95 });
         const mesh = new THREE.Mesh(geom, mat);
         mesh.position.set(modelX, (surfZ + 18) * state.currentVertExag, modelZ);
         mesh.userData = {
@@ -531,6 +578,7 @@ export function buildLandslideLocMarkers() {
             ...coordMetaFromItm(pt.x, pt.y, 'processed GSI landslide coordinate'),
         };
         state.landslideLocsGroup.add(mesh);
+        addSurfaceHalo(state.landslideLocsGroup, modelX, modelZ, surfZ + 2, 0xf85149, 22, 38, mesh.userData, 0.22);
     }
 }
 
@@ -541,8 +589,10 @@ export function buildMineralMarkers() {
         'Metal': 0xFFD700, 'Industrial': 0x87CEEB,
         'Mineral': 0xDDA0DD, 'Quarry': 0xA0522D,
     };
-    const count = state.mineralsData.length;
-    const geom = new THREE.OctahedronGeometry(18, 0);
+    const visibleRecords = state.mineralsData.filter(pt => isInsideModelExtent(pt.x, pt.y));
+    const count = visibleRecords.length;
+    if (!count) return;
+    const geom = new THREE.OctahedronGeometry(21, 0);
     const mat = new THREE.MeshBasicMaterial({ color: 0xffffff });
     const instMesh = new THREE.InstancedMesh(geom, mat, count);
     instMesh.instanceColor = new THREE.InstancedBufferAttribute(new Float32Array(count * 3), 3);
@@ -550,10 +600,10 @@ export function buildMineralMarkers() {
     const dummy = new THREE.Object3D();
     const tmpColor = new THREE.Color();
     const instanceUserData = [];
-    const visualOffsets = coLocationOffsets(state.mineralsData, 24);
+    const visualOffsets = coLocationOffsets(visibleRecords, 24);
 
     for (let i = 0; i < count; i++) {
-        const pt = state.mineralsData[i];
+        const pt = visibleRecords[i];
         const { x: modelX, z: modelZ } = itmToModel(pt.x, pt.y);
         const offset = visualOffsets.get(i) || { x: 0, z: 0, count: 1 };
         const visualX = modelX + offset.x;
@@ -562,7 +612,7 @@ export function buildMineralMarkers() {
         const color = MINERAL_COLORS[minType] || 0xDDA0DD;
         const surfZ = surfaceZAtModel(visualX, visualZ, 70);
 
-        dummy.position.set(visualX, (surfZ + 14) * state.currentVertExag, visualZ);
+        dummy.position.set(visualX, (surfZ + 16) * state.currentVertExag, visualZ);
         dummy.updateMatrix();
         instMesh.setMatrixAt(i, dummy.matrix);
 
@@ -576,7 +626,7 @@ export function buildMineralMarkers() {
             townland: pt.TOWNLAND || '',
             desc: pt.DESCRIPTIO || '',
             notes: pt.NOTES1 || '',
-            rawTopZ: surfZ + 14, baseX: visualX, baseZ: visualZ,
+            rawTopZ: surfZ + 16, baseX: visualX, baseZ: visualZ,
             visualOffsetM: offset.count > 1 ? Math.round(Math.hypot(offset.x, offset.z)) : null,
             ...coordMetaFromItm(pt.x, pt.y, 'processed GSI mineral coordinate'),
         });
@@ -596,6 +646,7 @@ export function buildHistoricalInvestigations() {
         if (!geom || geom.type !== 'Point') continue;
         const props = feat.properties || {};
         const { x, z } = wgs84ToModel(geom.coordinates[0], geom.coordinates[1]);
+        if (!isInsideModelPoint(x, z)) continue;
         const surfZ = surfaceZAtModel(x, z, 55);
 
         const cylGeom = new THREE.CylinderGeometry(18, 18, 6, 12);
@@ -617,6 +668,7 @@ export function buildHistoricalInvestigations() {
             ...coordMetaFromWgs84(geom.coordinates[0], geom.coordinates[1], 'processed GSI investigation centroid'),
         };
         state.histInvGroup.add(marker);
+        addSurfaceHalo(state.histInvGroup, x, z, surfZ + 1.5, 0xb8860b, 16, 31, marker.userData, 0.2);
     }
 }
 
@@ -662,4 +714,5 @@ export function buildGeminiMarker() {
         ),
     };
     state.geminiMarkerGroup.add(marker);
+    addSurfaceHalo(state.geminiMarkerGroup, x, z, surfZ + 1.5, 0x3fb950, 48, 68, marker.userData, 0.16);
 }

@@ -55,6 +55,7 @@ export function applyVerticalTransform() {
             const isSeg = obj.userData.type === 'borehole_instanced';
             const isCollar = obj.userData.type === 'bh_collar_instanced';
             const isCap = obj.userData.type === 'bh_cap_instanced';
+            const isHalo = obj.userData.type === 'bh_halo_instanced';
             for (let i = 0; i < instances.length; i++) {
                 const d = instances[i];
                 dummy.rotation.set(0, 0, 0);
@@ -64,6 +65,10 @@ export function applyVerticalTransform() {
                 } else if (isCollar) {
                     dummy.position.set(d.baseX, (d.rawTopZ - d.rawHeight / 2) * ve, d.baseZ);
                     dummy.scale.set(1, ve, 1);
+                } else if (isHalo) {
+                    dummy.position.set(d.baseX, (d.rawTopZ + 0.9) * ve, d.baseZ);
+                    dummy.rotation.x = -Math.PI / 2;
+                    dummy.scale.set(1, 1, 1);
                 } else if (isCap) {
                     dummy.position.set(d.baseX, d.rawTopZ * ve, d.baseZ);
                     dummy.rotation.x = -Math.PI / 2;
@@ -144,7 +149,14 @@ export function applyVerticalTransform() {
     // Proposed BHE site footprint and subsurface design envelope
     for (const obj of state.proposedSiteGroup.children) {
         const d = obj.userData;
-        if (d.isProposedSiteVolume && d.rawCenterY !== undefined) {
+        if (d.rawPoints && obj.geometry?.attributes?.position) {
+            const pos = obj.geometry.attributes.position;
+            for (let i = 0; i < d.rawPoints.length && i < pos.count; i++) {
+                pos.setXYZ(i, d.rawPoints[i].x, d.rawPoints[i].y * ve, d.rawPoints[i].z);
+            }
+            pos.needsUpdate = true;
+            obj.geometry.computeBoundingSphere();
+        } else if (d.isProposedSiteVolume && d.rawCenterY !== undefined) {
             obj.position.set(d.baseX, d.rawCenterY * ve, d.baseZ);
             obj.scale.y = ve;
         } else if (d.rawTopZ !== undefined) {
@@ -166,6 +178,8 @@ export function applyVerticalTransform() {
     for (const obj of state.dyeTraceGroup.children) {
         const d = obj.userData;
         if (d.isDyeEnd) {
+            obj.position.set(d.baseX, d.rawTopZ * ve, d.baseZ);
+        } else if (d.rawTopZ !== undefined) {
             obj.position.set(d.baseX, d.rawTopZ * ve, d.baseZ);
         } else if (d.rawY && obj.geometry) {
             const pos = obj.geometry.attributes.position;

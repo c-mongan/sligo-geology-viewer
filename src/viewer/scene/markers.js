@@ -40,6 +40,13 @@ function surfaceZAtModel(modelX, modelZ, fallback = 57) {
     return top * (1 - ty) + bottom * ty;
 }
 
+function isInsideModelExtent(itmX, itmY) {
+    const extent = state.metadata?.extent;
+    if (!extent || !Number.isFinite(itmX) || !Number.isFinite(itmY)) return false;
+    return itmX >= extent.x_min && itmX <= extent.x_max
+        && itmY >= extent.y_min && itmY <= extent.y_max;
+}
+
 function makeSiteLabelTexture(lines) {
     const canvas = document.createElement('canvas');
     canvas.width = 512;
@@ -73,6 +80,55 @@ function makeSiteLabelTexture(lines) {
     return texture;
 }
 
+function makeDepthLabelTexture(text) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 192;
+    canvas.height = 64;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'rgba(13, 17, 23, 0.82)';
+    ctx.strokeStyle = 'rgba(126, 231, 135, 0.78)';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    if (ctx.roundRect) {
+        ctx.roundRect(8, 8, canvas.width - 16, canvas.height - 16, 12);
+    } else {
+        ctx.rect(8, 8, canvas.width - 16, canvas.height - 16);
+    }
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = '#e6edf3';
+    ctx.font = '600 26px Inter, system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(text, canvas.width / 2, canvas.height / 2 + 1);
+
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.colorSpace = THREE.SRGBColorSpace;
+    return texture;
+}
+
+function addRawLine(group, rawPoints, color, opacity, userData = {}, renderOrder = 97) {
+    const ve = state.currentVertExag;
+    const geom = new THREE.BufferGeometry().setFromPoints(
+        rawPoints.map(p => new THREE.Vector3(p.x, p.y * ve, p.z)),
+    );
+    const mat = new THREE.LineBasicMaterial({
+        color,
+        transparent: opacity < 1,
+        opacity,
+    });
+    const line = new THREE.Line(geom, mat);
+    line.renderOrder = renderOrder;
+    line.userData = {
+        ...userData,
+        rawPoints,
+    };
+    group.add(line);
+    return line;
+}
+
 function sampleFormationSurfaceZ(code, modelX, modelZ) {
     const mesh = state.allFormationMeshes.find(m => m.userData.code === code);
     const pos = mesh?.geometry?.attributes?.position;
@@ -104,6 +160,29 @@ function sampleFormationSurfaceZ(code, modelX, modelZ) {
         if (sampled == null || z > sampled) sampled = z;
     }
     return sampled;
+}
+
+function addSurfaceHalo(group, baseX, baseZ, rawTopZ, color, innerRadius, outerRadius, userData = {}, opacity = 0.28) {
+    const haloGeom = new THREE.RingGeometry(innerRadius, outerRadius, 32);
+    const haloMat = new THREE.MeshBasicMaterial({
+        color,
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity,
+        depthWrite: false,
+    });
+    const halo = new THREE.Mesh(haloGeom, haloMat);
+    halo.rotation.x = -Math.PI / 2;
+    halo.renderOrder = 84;
+    halo.userData = {
+        ...userData,
+        rawTopZ,
+        baseX,
+        baseZ,
+        isSurfaceHalo: true,
+    };
+    group.add(halo);
+    return halo;
 }
 
 function buildLocalFormationLayers(modelX, modelZ, topZ, modelFloor) {
@@ -334,36 +413,59 @@ export function buildBoreholes() {
 
     // ── Surface collars: low-profile design dots, not observed well posts ──
     if (collarInstances.length > 0) {
-        const markerGeom = new THREE.CylinderGeometry(6, 6, 3, 16);
-        const markerMat = new THREE.MeshStandardMaterial({
-            color: 0x3fb950, emissive: 0x115511, emissiveIntensity: 0.15,
-            roughness: 0.35, transparent: true, opacity: 0.9,
+        const haloGeom = new THREE.RingGeometry(13, 25, 28);
+        const haloMat = new THREE.MeshBasicMaterial({
+            color: 0x7ee787,
+            side: THREE.DoubleSide,
+            transparent: true,
+            opacity: 0.22,
+            depthWrite: false,
         });
+        const markerGeom = new THREE.CylinderGeometry(7, 7, 4, 18);
+        const markerMat = new THREE.MeshStandardMaterial({
+            color: 0x7ee787, emissive: 0x1f6f3a, emissiveIntensity: 0.22,
+            roughness: 0.32, transparent: true, opacity: 0.96,
+        });
+        const haloInst = new THREE.InstancedMesh(haloGeom, haloMat, collarInstances.length);
         const markerInst = new THREE.InstancedMesh(markerGeom, markerMat, collarInstances.length);
 
         const dummy = new THREE.Object3D();
         for (let i = 0; i < collarInstances.length; i++) {
             const m = collarInstances[i];
+            dummy.rotation.set(-Math.PI / 2, 0, 0);
+            dummy.position.set(m.baseX, (m.rawTopZ + 0.9) * ve, m.baseZ);
+            dummy.scale.set(1, 1, 1);
+            dummy.updateMatrix();
+            haloInst.setMatrixAt(i, dummy.matrix);
+
+            dummy.rotation.set(0, 0, 0);
             dummy.position.set(m.baseX, (m.rawTopZ - m.rawHeight / 2) * ve, m.baseZ);
             dummy.scale.set(1, ve, 1);
             dummy.updateMatrix();
             markerInst.setMatrixAt(i, dummy.matrix);
         }
 
+        haloInst.instanceMatrix.needsUpdate = true;
+        haloInst.frustumCulled = false;
+        haloInst.renderOrder = 88;
+        haloInst.userData = { type: 'bh_halo_instanced', instances: collarInstances };
+        state.boreholeGroup.add(haloInst);
+
         markerInst.instanceMatrix.needsUpdate = true;
         markerInst.frustumCulled = false;
+        markerInst.renderOrder = 89;
         markerInst.userData = { type: 'bh_collar_instanced', instances: collarInstances };
         state.boreholeGroup.add(markerInst);
     }
 
     // ── Risk cap InstancedMesh (sphere with per-instance risk color) ──
     if (capInstances.length > 0) {
-        const capGeom = new THREE.RingGeometry(7, 11, 20);
+        const capGeom = new THREE.RingGeometry(7, 15, 24);
         const capMat = new THREE.MeshStandardMaterial({
             color: 0xffffff,
             side: THREE.DoubleSide,
             transparent: true,
-            opacity: 0.85,
+            opacity: 0.9,
             roughness: 0.2,
         });
         const capInst = new THREE.InstancedMesh(capGeom, capMat, capInstances.length);
@@ -427,9 +529,9 @@ export function buildProposedSiteVolume() {
 
     const footprintGeom = new THREE.PlaneGeometry(width, depth);
     const footprintMat = new THREE.MeshBasicMaterial({
-        color: 0x3fb950,
+        color: 0x7ee787,
         transparent: true,
-        opacity: 0.18,
+        opacity: 0.2,
         side: THREE.DoubleSide,
         depthWrite: false,
     });
@@ -451,9 +553,9 @@ export function buildProposedSiteVolume() {
 
     const volumeGeom = new THREE.BoxGeometry(width, designDepth, depth);
     const volumeMat = new THREE.MeshBasicMaterial({
-        color: 0x58a6ff,
+        color: 0x79c0ff,
         transparent: true,
-        opacity: 0.08,
+        opacity: 0.13,
         side: THREE.DoubleSide,
         depthWrite: false,
     });
@@ -479,7 +581,7 @@ export function buildProposedSiteVolume() {
     const edgeMat = new THREE.LineBasicMaterial({
         color: 0x7ee787,
         transparent: true,
-        opacity: 0.75,
+        opacity: 0.9,
     });
     const edges = new THREE.LineSegments(edgeGeom, edgeMat);
     edges.position.set(cx, centerY * ve, cz);
@@ -498,6 +600,35 @@ export function buildProposedSiteVolume() {
         coordAccuracy: 'conceptual BHE layout',
     };
     state.proposedSiteGroup.add(edges);
+
+    const cornerPostGeom = new THREE.CylinderGeometry(2.4, 2.4, designDepth, 8);
+    const cornerPostMat = new THREE.MeshBasicMaterial({
+        color: 0x7ee787,
+        transparent: true,
+        opacity: 0.48,
+        depthWrite: false,
+    });
+    for (const sx of [-1, 1]) {
+        for (const sz of [-1, 1]) {
+            const post = new THREE.Mesh(cornerPostGeom, cornerPostMat);
+            post.position.set(cx + sx * width / 2, centerY * ve, cz + sz * depth / 2);
+            post.scale.y = ve;
+            post.renderOrder = 91;
+            post.userData = {
+                type: 'proposed_site',
+                isProposedSiteVolume: true,
+                rawCenterY: centerY,
+                rawHeight: designDepth,
+                baseX: cx + sx * width / 2,
+                baseZ: cz + sz * depth / 2,
+                title: 'Design Envelope Corner',
+                detail: `Visual guide for ${designDepth}m proposed BHE depth`,
+                coordSource: 'synthetic design borehole field envelope',
+                coordAccuracy: 'conceptual BHE layout',
+            };
+            state.proposedSiteGroup.add(post);
+        }
+    }
 
     const riskGeom = new THREE.RingGeometry(Math.max(width, depth) * 0.48, Math.max(width, depth) * 0.72, 72);
     const riskMat = new THREE.MeshBasicMaterial({
@@ -606,6 +737,76 @@ export function buildProposedSiteVolume() {
     };
     state.proposedSiteGroup.add(designDepthLine);
 
+    const rulerX = cx - width / 2 - 54;
+    const rulerZ = cz - depth * 0.52;
+    const tickLength = 34;
+    const rulerUserData = {
+        type: 'proposed_site',
+        title: 'BHE Design Depth Scale',
+        detail: `Depth below ground for the proposed ${designDepth}m closed-loop BHE field`,
+        coordSource: 'design depth and interpreted local geology',
+        coordAccuracy: 'conceptual BHE layout',
+    };
+    addRawLine(
+        state.proposedSiteGroup,
+        [
+            { x: rulerX, y: topZ, z: rulerZ },
+            { x: rulerX, y: bottomZ, z: rulerZ },
+        ],
+        0xe6edf3,
+        0.72,
+        rulerUserData,
+        98,
+    );
+
+    const depthTicks = [];
+    for (let metres = 0; metres <= designDepth; metres += 50) {
+        depthTicks.push(metres);
+    }
+    if (!depthTicks.includes(designDepth)) depthTicks.push(designDepth);
+
+    for (const metres of depthTicks) {
+        const tickY = topZ - metres;
+        const isDesignDepth = metres === designDepth;
+        addRawLine(
+            state.proposedSiteGroup,
+            [
+                { x: rulerX - tickLength * (isDesignDepth ? 0.65 : 0.45), y: tickY, z: rulerZ },
+                { x: rulerX + tickLength, y: tickY, z: rulerZ },
+            ],
+            isDesignDepth ? 0x7ee787 : 0xe6edf3,
+            isDesignDepth ? 0.96 : 0.74,
+            {
+                ...rulerUserData,
+                title: isDesignDepth ? '200m Design Depth' : 'Depth Tick',
+                detail: `${metres}m below proposed ground level`,
+            },
+            isDesignDepth ? 100 : 98,
+        );
+
+        const labelTexture = makeDepthLabelTexture(`${metres}m`);
+        const labelMat = new THREE.SpriteMaterial({
+            map: labelTexture,
+            transparent: true,
+            depthTest: false,
+            depthWrite: false,
+        });
+        const labelSprite = new THREE.Sprite(labelMat);
+        labelSprite.position.set(rulerX - tickLength - 34, tickY * ve, rulerZ);
+        labelSprite.scale.set(68, 23, 1);
+        labelSprite.renderOrder = 1000;
+        labelSprite.userData = {
+            ...rulerUserData,
+            type: 'proposed_site',
+            rawTopZ: tickY,
+            baseX: rulerX - tickLength - 34,
+            baseZ: rulerZ,
+            title: isDesignDepth ? '200m Design Depth' : 'Depth Reference',
+            detail: `${metres}m below proposed ground level`,
+        };
+        state.proposedSiteGroup.add(labelSprite);
+    }
+
     const labelTexture = makeSiteLabelTexture([
         'Proposed BHE Field',
         `${count} boreholes x ${designDepth}m`,
@@ -632,6 +833,31 @@ export function buildProposedSiteVolume() {
         coordAccuracy: 'conceptual BHE layout',
     };
     state.proposedSiteGroup.add(label);
+
+    const leaderRawPoints = [
+        { x: cx, y: topZ + 34, z: cz - depth * 0.56 },
+        { x: cx, y: topZ + 12, z: cz - depth * 0.34 },
+        { x: cx, y: topZ + 4, z: cz },
+    ];
+    const leaderGeom = new THREE.BufferGeometry().setFromPoints(
+        leaderRawPoints.map(p => new THREE.Vector3(p.x, p.y * ve, p.z)),
+    );
+    const leaderMat = new THREE.LineBasicMaterial({
+        color: 0x7ee787,
+        transparent: true,
+        opacity: 0.82,
+    });
+    const leader = new THREE.Line(leaderGeom, leaderMat);
+    leader.renderOrder = 998;
+    leader.userData = {
+        type: 'proposed_site',
+        rawPoints: leaderRawPoints,
+        title: 'Design Field Callout',
+        detail: `${count} proposed closed-loop BHEs in the highlighted envelope`,
+        coordSource: 'synthetic design borehole field envelope',
+        coordAccuracy: 'conceptual BHE layout',
+    };
+    state.proposedSiteGroup.add(leader);
 }
 
 // ── SRSC marker ─────────────────────────────────────
@@ -653,8 +879,19 @@ export function buildSRSCMarker() {
         'SRSC public listing/site coordinate',
         'building/site centroid',
     );
-    ring.userData = { rawTopZ: surfaceZ + 2, baseX: srscX, baseZ: srscZ, isSRSCRing: true, ...srscCoordMeta };
+    ring.userData = { type: 'srsc', rawTopZ: surfaceZ + 2, baseX: srscX, baseZ: srscZ, isSRSCRing: true, ...srscCoordMeta };
     state.srscGroup.add(ring);
+    addSurfaceHalo(
+        state.srscGroup,
+        srscX,
+        srscZ,
+        surfaceZ + 1.6,
+        0xf85149,
+        32,
+        48,
+        { type: 'srsc', isSRSCRing: true, ...srscCoordMeta },
+        0.16,
+    );
 
     const crossMat = new THREE.LineBasicMaterial({ color: 0xf85149, transparent: true, opacity: 0.95 });
     const crossSize = 34;
@@ -706,9 +943,14 @@ export function buildKarstFeatures() {
             'processed GSI karst coordinate',
             kf.xy_accuracy || null,
         );
+        const karstUserData = {
+            type: 'karst', name: kf.name, karstType: kf.type,
+            id: kf.id, distance: kf.distance_to_srsc_m, temp: kf.temp_c,
+            ...karstCoordMeta,
+        };
 
         if (kf.type === 'Cave' || kf.type === 'Swallow Hole') {
-            const coneGeom = new THREE.ConeGeometry(34, 48, 8);
+            const coneGeom = new THREE.ConeGeometry(34, 52, 10);
             const coneMat = new THREE.MeshStandardMaterial({
                 color: color, emissive: color, emissiveIntensity: 0.2,
                 roughness: 0.4,
@@ -716,24 +958,20 @@ export function buildKarstFeatures() {
             const cone = new THREE.Mesh(coneGeom, coneMat);
             cone.rotation.x = Math.PI;
             cone.userData = {
-                type: 'karst', name: kf.name, karstType: kf.type,
-                id: kf.id, distance: kf.distance_to_srsc_m, temp: kf.temp_c,
                 rawTopZ: surfZ + 24, baseX: x, baseZ: z,
-                ...karstCoordMeta,
+                ...karstUserData,
             };
             state.karstGroup.add(cone);
         } else if (kf.type === 'Spring') {
-            const coneGeom = new THREE.ConeGeometry(34, 44, 8);
+            const coneGeom = new THREE.ConeGeometry(34, 48, 12);
             const coneMat = new THREE.MeshStandardMaterial({
                 color: color, emissive: color, emissiveIntensity: 0.3,
                 roughness: 0.3,
             });
             const cone = new THREE.Mesh(coneGeom, coneMat);
             cone.userData = {
-                type: 'karst', name: kf.name, karstType: kf.type,
-                id: kf.id, distance: kf.distance_to_srsc_m, temp: kf.temp_c,
                 rawTopZ: surfZ + 44, baseX: x, baseZ: z,
-                ...karstCoordMeta,
+                ...karstUserData,
             };
             state.karstGroup.add(cone);
         } else {
@@ -746,27 +984,24 @@ export function buildKarstFeatures() {
             const bowl = new THREE.Mesh(bowlGeom, bowlMat);
             bowl.rotation.x = Math.PI;
             bowl.userData = {
-                type: 'karst', name: kf.name, karstType: kf.type,
-                id: kf.id, distance: kf.distance_to_srsc_m, temp: kf.temp_c,
                 rawTopZ: surfZ, baseX: x, baseZ: z,
-                ...karstCoordMeta,
+                ...karstUserData,
             };
             state.karstGroup.add(bowl);
         }
 
-        const geom = new THREE.OctahedronGeometry(28, 0);
+        const geom = new THREE.OctahedronGeometry(30, 0);
         const mat = new THREE.MeshStandardMaterial({
             color: color, emissive: color, emissiveIntensity: 0.3,
             roughness: 0.3,
         });
         const markerMesh = new THREE.Mesh(geom, mat);
         markerMesh.userData = {
-            type: 'karst', name: kf.name, karstType: kf.type,
-            id: kf.id, distance: kf.distance_to_srsc_m, temp: kf.temp_c,
             rawTopZ: surfZ + 46, baseX: x, baseZ: z,
-            ...karstCoordMeta,
+            ...karstUserData,
         };
         state.karstGroup.add(markerMesh);
+        addSurfaceHalo(state.karstGroup, x, z, surfZ + 5, color, 42, 64, karstUserData, 0.24);
 
         const riskRadius = 500;
         const riskGeom = new THREE.RingGeometry(riskRadius * 0.95, riskRadius, 48);
@@ -814,11 +1049,12 @@ export function buildRegionalKarstFeatureMarkers() {
     for (let i = 0; i < state.regionalKarstData.length; i++) {
         const pt = state.regionalKarstData[i];
         if (!Number.isFinite(pt.x) || !Number.isFinite(pt.y) || isSiteFeature(pt)) continue;
+        if (!isInsideModelExtent(pt.x, pt.y)) continue;
         const { x, z } = itmToModel(pt.x, pt.y);
         const surfZ = surfaceZAtModel(x, z, 55);
         const karstType = pt.KARST_TYPE || 'Karst feature';
         const color = KARST_COLORS[karstType] || 0xf0883e;
-        const geom = new THREE.OctahedronGeometry(16, 0);
+        const geom = new THREE.OctahedronGeometry(18, 0);
         const mat = new THREE.MeshStandardMaterial({
             color,
             emissive: color,
@@ -865,7 +1101,7 @@ export function buildDyeTraces() {
         const curve = new THREE.QuadraticBezierCurve3(points[0], points[1], points[2]);
         const curvePoints = curve.getPoints(30);
         const geom = new THREE.BufferGeometry().setFromPoints(curvePoints);
-        const mat = new THREE.LineBasicMaterial({ color: 0xa371f7, linewidth: 2, transparent: true, opacity: 0.45 });
+        const mat = new THREE.LineBasicMaterial({ color: 0xa371f7, linewidth: 2, transparent: true, opacity: 0.58 });
         const line = new THREE.Line(geom, mat);
         line.userData = {
             type: 'dyetrace', name: dt.name, length: dt.length_m,
@@ -877,8 +1113,8 @@ export function buildDyeTraces() {
         state.dyeTraceGroup.add(line);
 
         for (const pt of [points[0], points[2]]) {
-            const sg = new THREE.SphereGeometry(12, 8, 8);
-            const sm = new THREE.MeshBasicMaterial({ color: 0xa371f7 });
+            const sg = new THREE.SphereGeometry(15, 12, 8);
+            const sm = new THREE.MeshBasicMaterial({ color: 0xc9a7ff, transparent: true, opacity: 0.92 });
             const s = new THREE.Mesh(sg, sm);
             const isInput = pt === points[0];
             const endpointMeta = pt === points[0]
@@ -898,6 +1134,7 @@ export function buildDyeTraces() {
                 ...endpointMeta,
             };
             state.dyeTraceGroup.add(s);
+            addSurfaceHalo(state.dyeTraceGroup, pt.x, pt.z, pt.y + 1, 0xa371f7, 16, 27, s.userData, 0.22);
         }
     }
 }
@@ -933,16 +1170,30 @@ export function buildGSIWells() {
             roughness: 0.35,
         });
         const marker = new THREE.Mesh(pinGeom, pinMat);
-        marker.userData = {
+        const wellUserData = {
             type: 'gsi_well', id: well.id, name: well.name,
             wellType: well.type, depth,
             dtb: well.dtb_m, water_strike: well.water_strike_m,
             yield_m3d: well.yield_m3d, yield_class: well.yield_class,
             notes: well.notes, temp: well.temp_c,
-            rawTopZ: surfZ + 54, rawHeight: isSpring ? undefined : 46, baseX: x, baseZ: z,
             ...wellCoordMeta,
         };
+        marker.userData = {
+            ...wellUserData,
+            rawTopZ: surfZ + 54, rawHeight: isSpring ? undefined : 46, baseX: x, baseZ: z,
+        };
         state.gsiWellGroup.add(marker);
+        addSurfaceHalo(
+            state.gsiWellGroup,
+            x,
+            z,
+            surfZ + 2.4,
+            markerColor,
+            markerRadius * 0.95,
+            markerRadius * 1.36,
+            { ...wellUserData, isWellRing: true },
+            isAghamoreSpring ? 0.3 : 0.2,
+        );
 
         if (well.water_strike_m) {
             const wsGeom = new THREE.OctahedronGeometry(16, 0);
@@ -997,13 +1248,8 @@ export function buildGSIWells() {
         const ring = new THREE.Mesh(ringGeom, ringMat);
         ring.rotation.x = -Math.PI / 2;
         ring.userData = {
-            type: 'gsi_well', id: well.id, name: well.name,
-            wellType: well.type, depth: well.depth_m,
-            dtb: well.dtb_m, water_strike: well.water_strike_m,
-            yield_m3d: well.yield_m3d, yield_class: well.yield_class,
-            notes: well.notes,
+            ...wellUserData,
             rawTopZ: surfZ + 2, baseX: x, baseZ: z, isWellRing: true,
-            ...wellCoordMeta,
         };
         state.gsiWellGroup.add(ring);
 
