@@ -570,7 +570,7 @@ export function initControls() {
         if (state.satellitePlane) {
             state.satellitePlane.material.opacity = v;
             state.satellitePlane.material.transparent = v < 1;
-            state.satellitePlane.material.depthWrite = v >= 0.75;
+            state.satellitePlane.material.depthWrite = true;
         }
     });
 
@@ -585,7 +585,7 @@ export function initControls() {
         for (const mesh of state.terrainGroup.children) {
             mesh.material.opacity = v;
             mesh.material.transparent = v < 1;
-            mesh.material.depthWrite = v >= 0.75;
+            mesh.material.depthWrite = true;
             mesh.material.needsUpdate = true;
         }
     });

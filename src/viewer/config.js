@@ -2,7 +2,7 @@
 
 // Render pipeline constants
 export const RENDER_ORDER = { SATELLITE: 0, OVERLAY: 1, FORMATION: 2, TERRAIN: 10, ANNOTATION: 999 };
-export const BASE_CLAMP_BUFFER = 5; // real-world metres below sampled terrain
+export const BASE_CLAMP_BUFFER = 35; // real-world metres below sampled terrain
 
 // Formation colours
 export const COLORS = {
