@@ -1,8 +1,8 @@
 # Sligo Basin 3D Viewer: short video overview
 
-[![Watch the 21-second overview](poster.jpg)](https://github.com/user-attachments/assets/658acc7a-5860-48cc-8361-a632a9025a16)
+[![Watch the 21-second overview](poster.jpg)](https://github.com/c-mongan/sligo-geology-viewer/releases/tag/portfolio-overview-2026-10-23)
 
-[Open or download the MP4](https://github.com/user-attachments/assets/658acc7a-5860-48cc-8361-a632a9025a16) · [Transcript](transcript.txt) · [Captions (SRT)](captions.srt) · [Captions (VTT)](captions.vtt)
+[Watch on GitHub](https://github.com/c-mongan/sligo-geology-viewer/releases/tag/portfolio-overview-2026-10-23) · [Download MP4](https://github.com/c-mongan/sligo-geology-viewer/releases/download/portfolio-overview-2026-10-23/sligo.mp4) · [Transcript](transcript.txt) · [Captions (SRT)](captions.srt) · [Captions (VTT)](captions.vtt)
 
 Recorded project screenshots of an interpreted geological model. Screening only; not an engineering assessment.
 
@@ -13,7 +13,7 @@ The video introduces the project; it does not replace its validation records or 
 - Duration: 20.633 seconds; 1920 × 1080; 30 fps; H.264 video and AAC audio.
 - Published video SHA-256: `f7551ce41b4f2b52873edd9292eb5f0973e705a5f82da4d203414363cfb7a9cb`.
 - AI narration: Inworld TTS 2, using the voice selected by the project author.
-- Music: *Happy Beats / Business Moves Vol. 10* by [Sascha Ende, ende.app](https://ende.app/en), licensed under [CC BY 4.0](https://ende.app/en/standard-license). The track is trimmed, faded, and mixed beneath speech.
+- Music: *Happy Beats / Business Moves Vol. 10* by Sascha Ende (ende.app), licensed under [CC BY 4.0](https://github.com/spdx/license-list-data/blob/main/text/CC-BY-4.0.txt); see the [bundled music attribution](https://github.com/latent-spaces/brag/blob/99a49090808cff1f42ba1fc2f939ddbf7724a4a9/skills/brag/assets/music/README.md). The track is trimmed, faded, and mixed beneath speech.
 - Story and video workflow: [Brag](https://github.com/latent-spaces/brag); rendered locally with [Hyperframes](https://github.com/heygen-com/hyperframes).
 
 ## Visual sources
