@@ -1,0 +1,7 @@
+What is beneath the landscape around Sligo?
+
+I built a three dimensional viewer from public geoscience data.
+
+Explore formation surfaces, cross sections, and source information in one scene.
+
+It is an interpreted model, not an engineering assessment. Explore the project on GitHub.

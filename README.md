@@ -4,6 +4,17 @@ An open geoscience portfolio project: a static Three.js viewer for an interprete
 
 It turns public geoscience datasets into an interactive subsurface scene with formation surfaces, faults, borehole context, geothermal screening layers, groundwater/karst evidence, provenance labels, and drilling-risk workflows. No backend service is required.
 
+<!-- portfolio-video:start -->
+
+## Short video overview
+
+**21 seconds.** Recorded project screenshots of an interpreted geological model. Screening only; not an engineering assessment.
+
+[![Watch the 21-second video overview](docs/portfolio-video/poster.jpg)](https://github.com/c-mongan/sligo-geology-viewer/releases/tag/portfolio-overview-2026-10-23)
+
+[Watch on GitHub](https://github.com/c-mongan/sligo-geology-viewer/releases/tag/portfolio-overview-2026-10-23) · [Download MP4](https://github.com/c-mongan/sligo-geology-viewer/releases/download/portfolio-overview-2026-10-23/sligo.mp4) · [Transcript](docs/portfolio-video/transcript.txt) · [Captions](docs/portfolio-video/captions.srt) · [Credits and source notes](docs/portfolio-video/README.md)
+<!-- portfolio-video:end -->
+
 **Live demo:** [Open the Sligo 3D viewer](https://sligo-digital-twin.vercel.app/?lang=en&crop=ireland&lon=-8.48221&lat=54.25329&elevation=50&heading=58&pitch=0&layers=srsc.marker%2Csligo.boreholes%2Csligo.faults%2Csligo.formation.ballysodare%2Csligo.formation.mullaghmore%2Csligo.formation.bundoran%2Csligo.formation.lisgorman%2Csligo.formation.benbulben%2Csligo.formation.glencar%2Csligo.formation.dartry%2Cgsi.bedrock.100k&layers_transparency=0%2C0%2C0.4%2C0.08%2C0.08%2C0.08%2C0.08%2C0.08%2C0.08%2C0.08%2C0.5)
 
 ![Sligo Basin 3D geology overview](docs/assets/overview.png)

@@ -1,0 +1,18 @@
+1
+00:00:00,350 --> 00:00:02,590
+What is beneath the landscape around Sligo?
+
+2
+00:00:03,350 --> 00:00:07,130
+I built a three dimensional viewer from public
+geoscience data.
+
+3
+00:00:08,450 --> 00:00:13,330
+Explore formation surfaces, cross sections, and
+source information in one scene.
+
+4
+00:00:14,650 --> 00:00:20,094
+It is an interpreted model, not an engineering
+assessment. Explore the project on GitHub.
