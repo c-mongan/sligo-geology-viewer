@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Static Three.js viewer for an interpreted Sligo Basin geological model.",
   "private": true,
+  "homepage": "https://sligo-digital-twin.vercel.app/",
   "repository": {
     "type": "git",
     "url": "https://github.com/c-mongan/sligo-geology-viewer.git"

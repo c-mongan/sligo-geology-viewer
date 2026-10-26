@@ -18,3 +18,63 @@ engineering, drilling, hydrogeological, or planning assessments.
 
 If you publish derived work, review and retain the attribution and license terms
 for any upstream datasets you add or redistribute.
+
+Third-party sources used by this project
+----------------------------------------
+
+Where a licence is not stated in this repository or confirmed here, this file
+says "see provider terms" instead of guessing. Check the provider before
+reusing any data.
+
+1. Geological Survey Ireland (GSI) - https://www.gsi.ie/
+   Used: bedrock geology, faults, boreholes, groundwater, geothermal, karst,
+   quaternary and geohazard datasets (ArcGIS REST services at
+   gsi.geodata.gov.ie), processed into the JSON payloads in output/json.
+   Licence: Creative Commons Attribution 4.0 International (CC BY 4.0), as
+   recorded in output/json/source_inventory.json.
+   Contains Irish Public Sector Data (Geological Survey Ireland) licensed under
+   CC BY 4.0. https://creativecommons.org/licenses/by/4.0/
+
+2. Environmental Protection Agency (EPA), Ireland - https://gis.epa.ie/
+   Used: groundwater body status polygons (WFS at gis.epa.ie/geoserver/EPA/wfs)
+   referenced by the viewer layer list. The source inventory records the
+   licence only as "Open", which is not a specific licence.
+   Licence: see provider terms - https://www.epa.ie/
+
+3. Other Irish and international public data sources
+   output/json/source_inventory.json lists further sources (for example Met
+   Eireann, OPW, NPWS, Marine Institute, CSO, Irish Rail, TII, INSN/GFZ) with
+   the licence text recorded by the project. Those entries are catalogue
+   metadata only. Licence: see each provider's terms; one OPW entry is
+   recorded as CC-BY-NC-ND.
+
+4. SRTM elevation data (NASA / USGS; CGIAR-CSI 90 m distribution) -
+   https://srtm.csi.cgiar.org/
+   Used: an optional locally supplied terrain grid. No SRTM grid is included in
+   this repository.
+   Licence: NASA SRTM data are in the public domain; for the CGIAR-CSI
+   derivative, see provider terms at the URL above.
+
+5. Esri World Imagery - https://www.arcgis.com/home/item.html?id=10df2279f9684e4a9f6a7f08febac2a9
+   Used: satellite tiles requested at runtime from server.arcgisonline.com and
+   draped on the terrain. Not redistributed in this repository.
+   Terms: Esri terms of use and the imagery attribution shown by Esri apply;
+   see https://www.esri.com/en-us/legal/terms/full-master-agreement
+
+6. Mapbox Terrain-RGB - https://www.mapbox.com/
+   Used: optional elevation tiles from api.mapbox.com, enabled only when a user
+   supplies their own access token (via the mapbox_token URL parameter). No
+   token is included in this repository.
+   Terms: Mapbox Terms of Service, https://www.mapbox.com/legal/tos
+
+7. Google Fonts (Inter) - https://fonts.google.com/specimen/Inter
+   Used: the Inter typeface, loaded at runtime from fonts.googleapis.com.
+   Licence: SIL Open Font License 1.1. https://openfontlicense.org/
+
+8. npm dependencies: three (MIT), three-mesh-bvh (MIT), proj4 (MIT). Their
+   licences are in the installed packages.
+
+Documentation media
+-------------------
+The project video overview in docs/portfolio-video uses music by Sascha Ende
+(ende.app) under CC BY 4.0; see docs/portfolio-video/README.md.
