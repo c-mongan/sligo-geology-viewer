@@ -1,0 +1,38 @@
+name: Bug report
+description: Something in the viewer is broken or looks wrong
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you expect, and what did you see instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Include the URL or query string if relevant.
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and OS
+      placeholder: Chrome 130 on macOS 15
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where did you see it?
+      options:
+        - Live demo
+        - Local build (npm run build / serve)
+        - Dev server (npm run dev)
+    validations:
+      required: true
+  - type: textarea
+    id: console
+    attributes:
+      label: Console output or screenshots
+      description: Paste browser console errors or attach a screenshot. Do not include tokens or secrets.
