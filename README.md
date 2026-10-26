@@ -4,6 +4,8 @@ An open geoscience portfolio project: a static Three.js viewer for an interprete
 
 It turns public geoscience datasets into an interactive subsurface scene with formation surfaces, faults, borehole context, geothermal screening layers, groundwater/karst evidence, provenance labels, and drilling-risk workflows. No backend service is required.
 
+**Who it's for:** geoscience students, geothermal and planning researchers, and developers interested in Three.js geodata viewers. It is an interpreted model, not an engineering assessment.
+
 <!-- portfolio-video:start -->
 
 ## Short video overview
@@ -15,7 +17,7 @@ It turns public geoscience datasets into an interactive subsurface scene with fo
 [Watch on GitHub](https://github.com/c-mongan/sligo-geology-viewer/releases/tag/portfolio-overview-2026-10-23) · [Download MP4](https://github.com/c-mongan/sligo-geology-viewer/releases/download/portfolio-overview-2026-10-23/sligo.mp4) · [Transcript](docs/portfolio-video/transcript.txt) · [Captions](docs/portfolio-video/captions.srt) · [Credits and source notes](docs/portfolio-video/README.md)
 <!-- portfolio-video:end -->
 
-**Live demo:** [Open the Sligo 3D viewer](https://sligo-digital-twin.vercel.app/?lang=en&crop=ireland&lon=-8.48221&lat=54.25329&elevation=50&heading=58&pitch=0&layers=srsc.marker%2Csligo.boreholes%2Csligo.faults%2Csligo.formation.ballysodare%2Csligo.formation.mullaghmore%2Csligo.formation.bundoran%2Csligo.formation.lisgorman%2Csligo.formation.benbulben%2Csligo.formation.glencar%2Csligo.formation.dartry%2Cgsi.bedrock.100k&layers_transparency=0%2C0%2C0.4%2C0.08%2C0.08%2C0.08%2C0.08%2C0.08%2C0.08%2C0.08%2C0.5)
+**Live demo:** [sligo-digital-twin.vercel.app](https://sligo-digital-twin.vercel.app/)
 
 ![Sligo Basin 3D geology overview](docs/assets/overview.png)
 
@@ -29,17 +31,13 @@ It turns public geoscience datasets into an interactive subsurface scene with fo
 
 ## Screenshots
 
-| Overview | Proposed Site |
+| Proposed Site | Cross Section |
 | --- | --- |
-| ![Overview](docs/assets/overview.png) | ![Proposed site](docs/assets/proposed-site.png) |
+| ![Proposed site](docs/assets/proposed-site.png) | ![Cross section](docs/assets/cross-section.png) |
 
-| Cross Section | Drilling Risk |
+| Drilling Risk | Data Provenance |
 | --- | --- |
-| ![Cross section](docs/assets/cross-section.png) | ![Drilling risk](docs/assets/drilling-risk.png) |
-
-| Data Provenance |
-| --- |
-| ![Data provenance](docs/assets/data-provenance.png) |
+| ![Drilling risk](docs/assets/drilling-risk.png) | ![Data provenance](docs/assets/data-provenance.png) |
 
 ## Quick Start
 
@@ -75,7 +73,7 @@ Contains Irish Public Sector Data (Geological Survey Ireland) licensed under a C
 
 The 3D model surfaces, borehole array, prognosis, and risk labels are derived interpretations. They are not certified engineering, drilling, hydrogeological, or planning assessments. Field investigation and authoritative source datasets should override conclusions from this viewer.
 
-See `NOTICE` for attribution notes.
+See [NOTICE](NOTICE) for per-provider attribution notes, and [CONTRIBUTING.md](CONTRIBUTING.md) if you want to help.
 
 ## Repository Scope
 
