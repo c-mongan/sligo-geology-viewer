@@ -1,43 +1,14 @@
 # Sligo Basin 3D Geology Viewer
 
-An open geoscience portfolio project: a static Three.js viewer for an interpreted 3D geological model of the Sligo Basin, Ireland.
+A static Three.js viewer for an interpreted 3D geological model of the Sligo Basin, Ireland.
 
 It turns public geoscience datasets into an interactive subsurface scene with formation surfaces, faults, borehole context, geothermal screening layers, groundwater/karst evidence, provenance labels, and drilling-risk workflows. No backend service is required.
 
 **Who it's for:** geoscience students, geothermal and planning researchers, and developers interested in Three.js geodata viewers. It is an interpreted model, not an engineering assessment.
 
-<!-- portfolio-video:start -->
-
-## Short video overview
-
-**21 seconds.** Recorded project screenshots of an interpreted geological model. Screening only; not an engineering assessment.
-
-[![Watch the 21-second video overview](docs/portfolio-video/poster.jpg)](https://github.com/c-mongan/sligo-geology-viewer/releases/tag/portfolio-overview-2026-10-23)
-
-[Watch on GitHub](https://github.com/c-mongan/sligo-geology-viewer/releases/tag/portfolio-overview-2026-10-23) · [Download MP4](https://github.com/c-mongan/sligo-geology-viewer/releases/download/portfolio-overview-2026-10-23/sligo.mp4) · [Transcript](docs/portfolio-video/transcript.txt) · [Captions](docs/portfolio-video/captions.srt) · [Credits and source notes](docs/portfolio-video/README.md)
-<!-- portfolio-video:end -->
-
 **Live demo:** [sligo-digital-twin.vercel.app](https://sligo-digital-twin.vercel.app/)
 
 ![Sligo Basin 3D geology overview](docs/assets/overview.png)
-
-## Highlights
-
-- **Static-first deployment:** Vite builds the viewer into `output/viewer`, with JSON payloads served directly from `output/json`.
-- **3D geoscience scene:** Seven interpreted Carboniferous formation surfaces, fault sheets, terrain, satellite imagery, and borehole/design context.
-- **Risk-oriented workflows:** Drilling-risk mode, site assessment, prognosis, measurement, section views, and provenance panels.
-- **Data transparency:** Public-source labels, confidence tags, and derived/observed/design distinctions are visible in the UI.
-- **Open-source friendly:** The repo excludes private planning notes, local env files, raw bulk datasets, backend experiments, and third-party documents.
-
-## Screenshots
-
-| Proposed Site | Cross Section |
-| --- | --- |
-| ![Proposed site](docs/assets/proposed-site.png) | ![Cross section](docs/assets/cross-section.png) |
-
-| Drilling Risk | Data Provenance |
-| --- | --- |
-| ![Drilling risk](docs/assets/drilling-risk.png) | ![Data provenance](docs/assets/data-provenance.png) |
 
 ## Quick Start
 
@@ -56,6 +27,44 @@ npm run dev
 ```
 
 Open `http://localhost:9090/viewer/`.
+
+## How it works
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/sligo-viewer-dark.png">
+  <img src="docs/diagrams/sligo-viewer-light.png" alt="Public GSI, EPA, Esri and SRTM data becomes an interpreted model of seven Carboniferous formations with faults and a 48-borehole design array, shown in a viewer with drilling-risk, subsoil and vulnerability overlays and a provenance receipt for every layer.">
+</picture>
+
+<sub>Editable source: [`docs/diagrams/sligo-viewer.drawio`](docs/diagrams/sligo-viewer.drawio). Band heights are schematic; counts come from `output/json`.</sub>
+
+<!-- portfolio-video:start -->
+
+## Short video overview
+
+**21 seconds.** Recorded project screenshots of an interpreted geological model. Screening only; not an engineering assessment.
+
+[![Watch the 21-second video overview](docs/portfolio-video/poster.jpg)](https://github.com/c-mongan/sligo-geology-viewer/releases/tag/portfolio-overview-2026-10-23)
+
+[Watch on GitHub](https://github.com/c-mongan/sligo-geology-viewer/releases/tag/portfolio-overview-2026-10-23) · [Download MP4](https://github.com/c-mongan/sligo-geology-viewer/releases/download/portfolio-overview-2026-10-23/sligo.mp4) · [Transcript](docs/portfolio-video/transcript.txt) · [Captions](docs/portfolio-video/captions.srt) · [Credits and source notes](docs/portfolio-video/README.md)
+<!-- portfolio-video:end -->
+
+## Highlights
+
+- **Static-first deployment:** Vite builds the viewer into `output/viewer`, with JSON payloads served directly from `output/json`.
+- **3D geoscience scene:** Seven interpreted Carboniferous formation surfaces, fault sheets, terrain, satellite imagery, and borehole/design context.
+- **Risk-oriented workflows:** Drilling-risk mode, site assessment, prognosis, measurement, section views, and provenance panels.
+- **Data transparency:** Public-source labels, confidence tags, and derived/observed/design distinctions are visible in the UI.
+- **Open-source friendly:** The repo excludes private planning notes, local env files, raw bulk datasets, backend experiments, and third-party documents.
+
+## Screenshots
+
+| Proposed Site | Cross Section |
+| --- | --- |
+| ![Proposed site](docs/assets/proposed-site.png) | ![Cross section](docs/assets/cross-section.png) |
+
+| Drilling Risk | Data Provenance |
+| --- | --- |
+| ![Drilling risk](docs/assets/drilling-risk.png) | ![Data provenance](docs/assets/data-provenance.png) |
 
 ## Commands
 
